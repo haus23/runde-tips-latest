@@ -1,0 +1,13 @@
+# NPM deps
+node_modules/
+
+# Remix Build
+.cache/
+build/
+public/build/
+
+# Sensible data
+.env
+
+# SQLite DBs
+data/*.db
