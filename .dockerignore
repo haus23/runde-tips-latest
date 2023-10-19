@@ -1,0 +1,13 @@
+# NPM deps
+/node_modules
+
+# Env needs to be set with docker/host
+.env
+
+# Remix build
+/.cache
+/public/build
+/build
+
+# Development data
+/data
