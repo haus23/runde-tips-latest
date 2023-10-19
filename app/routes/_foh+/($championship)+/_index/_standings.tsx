@@ -1,5 +1,5 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 
 import { db } from '#app/utils/server/db.server';
 
@@ -50,7 +50,14 @@ export default function StandingsRoute() {
           {ranking.map((r) => (
             <tr key={r.id}>
               <td>{r.rank}</td>
-              <td>{r.user.name}</td>
+              <td>
+                <Link
+                  unstable_viewTransition
+                  to={`/tipps/spieler?name=${r.user.slug}`}
+                >
+                  {r.user.name}
+                </Link>
+              </td>
               {championship.completed && <td>{r.extraPoints}</td>}
               <td>{r.totalPoints}</td>
             </tr>
