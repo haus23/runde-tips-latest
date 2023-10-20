@@ -1,5 +1,7 @@
-import { Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
+import { json } from '@remix-run/node';
+import { Link, Outlet, useLoaderData } from '@remix-run/react';
 
+import { ChampionshipSelect } from '#app/components/championship-select';
 import { db } from '#app/utils/server/db.server';
 
 export async function loader() {
@@ -8,7 +10,7 @@ export async function loader() {
     orderBy: (championship, { desc }) => [desc(championship.nr)],
   });
 
-  return championships;
+  return json(championships);
 }
 
 export default function FohLayout() {
@@ -19,15 +21,7 @@ export default function FohLayout() {
       <Link to="/" unstable_viewTransition>
         <h1>runde.tips</h1>
       </Link>
-      <ul>
-        {championships.map((c) => (
-          <li key={c.id}>
-            <NavLink to={`/${c.slug}`} unstable_viewTransition>
-              {c.name}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+      <ChampionshipSelect />
       <main>
         <Outlet />
       </main>

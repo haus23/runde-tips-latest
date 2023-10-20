@@ -3,7 +3,7 @@ import { useLoaderData } from '@remix-run/react';
 
 import { db } from '#app/utils/server/db.server';
 
-export const loader = async ({ params, request }: DataFunctionArgs) => {
+export const loader = async ({ request }: DataFunctionArgs) => {
   const accountSlug = new URL(request.url).searchParams.get('name') || '';
 
   const user = await db.query.userTable.findFirst({
