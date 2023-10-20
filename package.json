@@ -27,6 +27,7 @@
     "isbot": "^3.7.0",
     "ky": "^1.1.0",
     "react": "^18.2.0",
+    "react-aria-components": "1.0.0-beta.2",
     "react-dom": "^18.2.0",
     "tsx": "^3.14.0",
     "zod": "^3.22.4"
