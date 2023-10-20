@@ -1,3 +1,4 @@
+import { json } from '@remix-run/node';
 import { Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
 
 import { db } from '#app/utils/server/db.server';
@@ -8,7 +9,7 @@ export async function loader() {
     orderBy: (championship, { desc }) => [desc(championship.nr)],
   });
 
-  return championships;
+  return json(championships);
 }
 
 export default function FohLayout() {
