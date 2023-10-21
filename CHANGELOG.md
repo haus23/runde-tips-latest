@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.1...v0.1.2)
+
+### 🚀 Enhancements
+
+- Custom hook to use (unstable) viewTransition as default ([5c3e990](https://github.com/haus23/runde-tips/commit/5c3e990))
+
+### 💅 Refactors
+
+- Use always react aria links. With client side router provider. ([0842541](https://github.com/haus23/runde-tips/commit/0842541))
+
+### 🏡 Chore
+
+- **dx:** Publish new image only on new (pre-) releases by now. ([b3f1c72](https://github.com/haus23/runde-tips/commit/b3f1c72))
+- **dx:** Start tagging the image releases. ([43c8ec0](https://github.com/haus23/runde-tips/commit/43c8ec0))
+- **dx:** Switch to valibot from zod. ([95754ea](https://github.com/haus23/runde-tips/commit/95754ea))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.1
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.0...v0.1.1)
