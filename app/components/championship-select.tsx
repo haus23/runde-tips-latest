@@ -1,8 +1,8 @@
 import { type ChangeEvent } from 'react';
-import { useNavigate } from '@remix-run/react';
 
 import { useChampionships } from '#app/utils/hooks/use-championships';
 import { useCurrentView } from '#app/utils/hooks/use-current-view';
+import { useNavigate } from '#app/utils/hooks/use-navigate';
 
 export function ChampionshipSelect() {
   const { championships, current } = useChampionships();
@@ -12,15 +12,12 @@ export function ChampionshipSelect() {
   function handleSelect(ev: ChangeEvent<HTMLSelectElement>) {
     const slug = ev.target.value;
     const championshipSegment = slug === championships[0]?.slug ? '' : slug;
-    navigate(
-      {
-        pathname: [featureSegment, championshipSegment, viewSegment]
-          .filter(Boolean)
-          .join('/'),
-        search,
-      },
-      { unstable_viewTransition: true },
-    );
+    navigate({
+      pathname: [featureSegment, championshipSegment, viewSegment]
+        .filter(Boolean)
+        .join('/'),
+      search,
+    });
   }
 
   return (
