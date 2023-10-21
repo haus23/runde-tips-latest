@@ -1,5 +1,7 @@
 import { useParams, useRouteLoaderData } from '@remix-run/react';
 
+import { array, parse } from 'valibot';
+
 import type { loader } from '#app/routes/_foh+/_layout';
 import { Championship } from '#db/model';
 
@@ -9,7 +11,7 @@ export function useChampionships() {
     'routes/_foh+/_layout',
   );
 
-  const championships = Championship.array().parse(championshipsData);
+  const championships = parse(array(Championship), championshipsData);
   const current = slug
     ? championships.find((c) => c.slug === slug)
     : championships[0];
