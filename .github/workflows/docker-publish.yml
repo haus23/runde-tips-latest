@@ -1,15 +1,17 @@
 name: Publish Docker Image
 
 on:
-  push:
-    branches: [ "main" ]
-    tags: [ 'v*.*.*' ]
+  release:
+    types: [released, prereleased]
+
+#  push:
+#    branches: [ "main" ]
+#    tags: [ 'v*.*.*' ]
 
 env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
   build:
@@ -20,7 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Login against registry 
+      # Login against registry
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
@@ -33,4 +35,3 @@ jobs:
         run: |
           docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-     
