@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-stone-300;
+  }
+
+  body {
+    @apply bg-stone-50  text-stone-900;
+  }
+}

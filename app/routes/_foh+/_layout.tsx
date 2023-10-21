@@ -1,8 +1,9 @@
 import { json } from '@remix-run/node';
-import { Link, Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet } from '@remix-run/react';
 
-import { ChampionshipSelect } from '#app/components/championship-select';
 import { db } from '#app/utils/server/db.server';
+
+import { FohHeader } from './header';
 
 export async function loader() {
   const championships = await db.query.championshipTable.findMany({
@@ -14,17 +15,12 @@ export async function loader() {
 }
 
 export default function FohLayout() {
-  const championships = useLoaderData<typeof loader>();
-
   return (
-    <div>
-      <Link to="/" unstable_viewTransition>
-        <h1>runde.tips</h1>
-      </Link>
-      <ChampionshipSelect />
-      <main>
+    <>
+      <FohHeader />
+      <main className="mx-auto mt-4 max-w-5xl pb-10 sm:mt-6 sm:px-6 lg:px-8">
         <Outlet />
       </main>
-    </div>
+    </>
   );
 }
