@@ -1,5 +1,7 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
+
+import { Link } from 'react-aria-components';
 
 import { db } from '#app/utils/server/db.server';
 
@@ -51,10 +53,7 @@ export default function StandingsRoute() {
             <tr key={r.id}>
               <td>{r.rank}</td>
               <td>
-                <Link
-                  unstable_viewTransition
-                  to={`/tipps/spieler?name=${r.user.slug}`}
-                >
+                <Link href={`/tipps/spieler?name=${r.user.slug}`}>
                   {r.user.name}
                 </Link>
               </td>
