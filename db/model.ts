@@ -1,4 +1,4 @@
-import { createSelectSchema } from 'drizzle-zod';
+import { createSelectSchema } from 'drizzle-valibot';
 
 import { championshipTable } from './schema';
 
