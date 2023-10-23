@@ -2,16 +2,17 @@ import { useParams, useRouteLoaderData } from '@remix-run/react';
 
 import { array, parse } from 'valibot';
 
-import type { loader } from '#app/routes/_foh+/_layout';
+import type { loader } from '#app/routes/_foh+/_layout/_foh-layout';
 import { Championship } from '#db/model';
 
 export function useChampionships() {
-  const { championship: slug } = useParams();
-  const championshipsData = useRouteLoaderData<typeof loader>(
-    'routes/_foh+/_layout',
-  );
+  const { championship: slug = '' } = useParams();
 
+  const championshipsData = useRouteLoaderData<typeof loader>(
+    'routes/_foh+/_layout/_foh-layout',
+  );
   const championships = parse(array(Championship), championshipsData);
+
   const current = slug
     ? championships.find((c) => c.slug === slug)
     : championships[0];

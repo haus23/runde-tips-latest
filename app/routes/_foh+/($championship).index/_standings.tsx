@@ -5,6 +5,8 @@ import { Link } from 'react-aria-components';
 
 import { db } from '#app/utils/server/db.server';
 
+export const handle = { viewPath: '' };
+
 export async function loader({ params }: DataFunctionArgs) {
   const { championship: slug } = params;
 

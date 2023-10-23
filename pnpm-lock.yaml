@@ -41,6 +41,9 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
+  react-aria:
+    specifier: ^3.29.1
+    version: 3.29.1(react-dom@18.2.0)(react@18.2.0)
   react-aria-components:
     specifier: 1.0.0-beta.2
     version: 1.0.0-beta.2(react-dom@18.2.0)(react@18.2.0)

@@ -29,6 +29,7 @@
     "isbot": "^3.7.0",
     "ky": "^1.1.0",
     "react": "^18.2.0",
+    "react-aria": "^3.29.1",
     "react-aria-components": "1.0.0-beta.2",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.14.0",
