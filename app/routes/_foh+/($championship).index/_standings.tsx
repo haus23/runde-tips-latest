@@ -1,7 +1,5 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-
-import { Link } from 'react-aria-components';
+import { Link, useLoaderData, useParams } from '@remix-run/react';
 
 import { db } from '#app/utils/server/db.server';
 
@@ -34,6 +32,7 @@ export async function loader({ params }: DataFunctionArgs) {
 
 export default function StandingsRoute() {
   const { championship, ranking } = useLoaderData<typeof loader>();
+  const { championship: championshipSlug = '' } = useParams();
 
   return (
     <div>
@@ -55,7 +54,14 @@ export default function StandingsRoute() {
             <tr key={r.id}>
               <td>{r.rank}</td>
               <td>
-                <Link href={`/tipps/spieler?name=${r.user.slug}`}>
+                <Link
+                  to={{
+                    pathname: `/${[championshipSlug, 'tipps/spieler']
+                      .filter(Boolean)
+                      .join('/')}`,
+                    search: `name=${r.user.slug}`,
+                  }}
+                >
                   {r.user.name}
                 </Link>
               </td>
