@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { nanoid } from 'nanoid';
 
 export const rulesetTable = sqliteTable('rulesets', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
@@ -40,6 +41,28 @@ export const userTable = sqliteTable('users', {
 
   roles: text('roles').notNull(),
   email: text('email').unique(),
+});
+
+export const totpTable = sqliteTable('totps', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+
+  hash: text('hash').notNull().unique(),
+  active: integer('active', { mode: 'boolean' }).notNull().default(true),
+  attempts: integer('attempts').notNull().default(0),
+  expiresAt: text('expires_at').default(''),
+});
+
+export const sessionTable = sqliteTable('sessions', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+
+  expirationDate: text('expiration_date'),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => userTable.id),
 });
 
 export const playerTable = sqliteTable('players', {

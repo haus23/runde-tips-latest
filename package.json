@@ -28,6 +28,7 @@
     "drizzle-valibot": "^0.1.1",
     "isbot": "^3.7.0",
     "ky": "^1.1.0",
+    "nanoid": "^5.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resend": "^1.1.0",
