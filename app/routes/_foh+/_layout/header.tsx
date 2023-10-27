@@ -35,7 +35,7 @@ export function FohHeader() {
       </div>
       <div className="flex gap-x-2">
         <ChampionshipSelect />
-        <Link to="/log-in">
+        <Link unstable_viewTransition to="/login">
           <Icon name="avatar" />
         </Link>
       </div>
