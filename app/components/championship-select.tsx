@@ -18,14 +18,17 @@ export function ChampionshipSelect() {
   function handleSelect(ev: ChangeEvent<HTMLSelectElement>) {
     const slug = ev.target.value;
     const championship = slug === championships[0]?.slug ? '' : slug;
-    navigate({
-      pathname: `/${[championship, viewPath].filter(Boolean).join('/')}`,
-      search,
-    });
+    navigate(
+      {
+        pathname: `/${[championship, viewPath].filter(Boolean).join('/')}`,
+        search,
+      },
+      { unstable_viewTransition: true },
+    );
   }
 
   return (
-    <select value={current.slug} onChange={handleSelect}>
+    <select value={current.slug} onChange={handleSelect} name="slug">
       {championships.map((c) => (
         <option key={c.id} value={c.slug}>
           {c.name}
