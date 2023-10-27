@@ -1,5 +1,9 @@
 import { json, redirect } from '@remix-run/node';
 
+import { email, parse, string } from 'valibot';
+
+import { db } from '#app/utils/server/db.server';
+
 import { getSession } from './session.server';
 
 export type AuthStatus = 'AWAIT_EMAIL' | 'AWAIT_TOTP';
@@ -19,11 +23,24 @@ export async function redirectIfAuthenticated(request: Request) {
 }
 
 export async function authenticate(request: Request) {
-  const form = await request.formData();
-
-  // Initially returns AWAIT_EMAIL status and no error
-  return json({
+  const authResponse: AuthResponse = {
     status: 'AWAIT_EMAIL',
     error: null,
-  } satisfies AuthResponse);
+  };
+
+  const form = await request.formData();
+
+  const submittedEmail = form.get('email');
+  if (submittedEmail) {
+    const user = await db.query.userTable.findFirst({
+      where: (users, { eq }) => eq(users.email, String(submittedEmail)),
+    });
+
+    if (!user) {
+      authResponse.error = 'INVALID_EMAIL';
+    }
+  }
+
+  // Initially returns AWAIT_EMAIL status and no error
+  return json(authResponse);
 }

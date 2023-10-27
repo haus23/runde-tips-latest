@@ -23,14 +23,20 @@ export default function LoginRoute() {
     <div>
       <h2>Anmeldung</h2>
       {(!actionResponse || actionResponse.status === 'AWAIT_EMAIL') && (
-        <Form method="POST">
-          <input
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="Bekannte Email-Adresse"
-          ></input>
-        </Form>
+        <div>
+          <Form method="POST">
+            <input
+              type="email"
+              name="email"
+              autoComplete="email"
+              required
+              placeholder="Bekannte Email-Adresse"
+            ></input>
+          </Form>
+          {actionResponse && actionResponse.error && (
+            <span>{actionResponse.error}</span>
+          )}
+        </div>
       )}
     </div>
   );
