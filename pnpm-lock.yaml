@@ -59,9 +59,6 @@ dependencies:
   remix-auth-totp:
     specifier: ^1.2.0
     version: 1.2.0(remix-auth@3.6.0)
-  resend:
-    specifier: ^1.1.0
-    version: 1.1.0
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0
@@ -1328,16 +1325,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-email/render@0.0.7:
-    resolution: {integrity: sha512-hMMhxk6TpOcDC5qnKzXPVJoVGEwfm+U5bGOPH+MyTTlx0F02RLQygcATBKsbP7aI/mvkmBAZoFbgPIHop7ovug==}
-    engines: {node: '>=16.0.0'}
-    dependencies:
-      html-to-text: 9.0.3
-      pretty: 2.0.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /@remix-run/dev@2.1.0(@remix-run/serve@2.1.0)(typescript@5.2.2):
     resolution: {integrity: sha512-Hn5lw46F+a48dp5uHKe68ckaHgdStW4+PmLod+LMFEqrMbkF0j4XD1ousebxlv989o0Uy/OLgfRMgMy4cBOvHg==}
     engines: {node: '>=18.0.0'}
@@ -1549,13 +1536,6 @@ packages:
     resolution: {integrity: sha512-KRJtwrjRV5Bb+pM7zxcTJkhIqWWSy+MYsIxHK+0m5atcznsf15YwUBWHWulZerV2+vvHH1Lp1DD7pw6qKW8SgA==}
     dependencies:
       web-streams-polyfill: 3.2.1
-
-  /@selderee/plugin-htmlparser2@0.10.0:
-    resolution: {integrity: sha512-gW69MEamZ4wk1OsOq1nG1jcyhXIQcnrsX5JwixVw/9xaiav8TCyjESAruu1Rz9yyInhgBXxkNwMeygKnN2uxNA==}
-    dependencies:
-      domhandler: 5.0.3
-      selderee: 0.10.0
-    dev: false
 
   /@selderee/plugin-htmlparser2@0.11.0:
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
@@ -3125,17 +3105,6 @@ packages:
       lru-cache: 7.18.3
     dev: true
 
-  /html-to-text@9.0.3:
-    resolution: {integrity: sha512-hxDF1kVCF2uw4VUJ3vr2doc91pXf2D5ngKcNviSitNkhP9OMOaJkDrFIFL6RMvko7NisWTEiqGpQ9LAxcVok1w==}
-    engines: {node: '>=14'}
-    dependencies:
-      '@selderee/plugin-htmlparser2': 0.10.0
-      deepmerge: 4.3.1
-      dom-serializer: 2.0.0
-      htmlparser2: 8.0.2
-      selderee: 0.10.0
-    dev: false
-
   /html-to-text@9.0.5:
     resolution: {integrity: sha512-qY60FjREgVZL03vJU6IfMV4GDjGBIoOyvuFdpBDIX9yTlDw0TjxVBQp+P8NvpdIXNJvfWBTNul7fsAQJq2FNpg==}
     engines: {node: '>=14'}
@@ -4483,13 +4452,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /parseley@0.11.0:
-    resolution: {integrity: sha512-VfcwXlBWgTF+unPcr7yu3HSSA6QUdDaDnrHcytVfj5Z8azAyKBDrYnSIfeSxlrEayndNcLmrXzg+Vxbo6DWRXQ==}
-    dependencies:
-      leac: 0.6.0
-      peberminta: 0.8.0
-    dev: false
-
   /parseley@0.12.1:
     resolution: {integrity: sha512-e6qHKe3a9HWr0oMRVDTRhKce+bRO8VGQR3NyVwcjwrbhMmFCX9KszEV35+rn4AdilFAq9VPxP/Fe1wC9Qjd2lw==}
     dependencies:
@@ -4532,10 +4494,6 @@ packages:
   /pathe@1.1.1:
     resolution: {integrity: sha512-d+RQGp0MAYTIaDBIMmOfMwz3E+LOZnxx1HZd5R18mmCZY0QBlK0LDZfPc8FW8Ed2DlvsuE6PRjroDY+wg4+j/Q==}
     dev: true
-
-  /peberminta@0.8.0:
-    resolution: {integrity: sha512-YYEs+eauIjDH5nUEGi18EohWE0nV2QbGTqmxQcqgZ/0g+laPCQmuIqq7EBLVi9uim9zMgfJv0QBZEnQ3uHw/Tw==}
-    dev: false
 
   /peberminta@0.9.0:
     resolution: {integrity: sha512-XIxfHpEuSJbITd1H3EeQwpcZbTLHc+VVr8ANI9t5sit565tsI4/xK3KWTUFE2e6QiangUkh3B0jihzmGnNrRsQ==}
@@ -5086,14 +5044,6 @@ packages:
     resolution: {integrity: sha512-oyrU88skkMtDdauHDuKVrgR+zuItqr6/c//FXzvmxRGMexSDc6hNvJInGW3LL46n+8b50RykrvwSUIIQH2LQ5A==}
     dev: true
 
-  /resend@1.1.0:
-    resolution: {integrity: sha512-it8TIDVT+/gAiJsUlv2tdHuvzwCCv4Zwu+udDqIm/dIuByQwe68TtFDcPccxqpSVVrNCBxxXLzsdT1tsV+P3GA==}
-    engines: {node: '>=18'}
-    dependencies:
-      '@react-email/render': 0.0.7
-      type-fest: 3.13.0
-    dev: false
-
   /resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
     dev: false
@@ -5161,12 +5111,6 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
-
-  /selderee@0.10.0:
-    resolution: {integrity: sha512-DEL/RW/f4qLw/NrVg97xKaEBC8IpzIG2fvxnzCp3Z4yk4jQ3MXom+Imav9wApjxX2dfS3eW7x0DXafJr85i39A==}
-    dependencies:
-      parseley: 0.11.0
     dev: false
 
   /selderee@0.11.0:
@@ -5631,11 +5575,6 @@ packages:
       tailwindcss: 3.3.2
     transitivePeerDependencies:
       - ts-node
-    dev: false
-
-  /type-fest@3.13.0:
-    resolution: {integrity: sha512-Gur3yQGM9qiLNs0KPP7LPgeRbio2QTt4xXouobMCarR0/wyW3F+F/+OWwshg3NG0Adon7uQfSZBpB46NfhoF1A==}
-    engines: {node: '>=14.16'}
     dev: false
 
   /type-is@1.6.18:

@@ -1,9 +1,6 @@
 import type { ReactElement } from 'react';
 
 import { renderAsync } from '@jsx-email/all';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail({
   react,
@@ -18,6 +15,7 @@ export async function sendEmail({
     renderAsync(react),
     renderAsync(react, { plainText: true }),
   ]);
+
   const email = {
     from,
     ...options,
@@ -25,17 +23,15 @@ export async function sendEmail({
     text,
   };
 
-  try {
-    const data = await resend.emails.send(email);
-
-    return {
-      status: 'success',
-      data: data.id,
-    } as const;
-  } catch (error) {
-    return {
-      status: 'error',
-      error,
-    } as const;
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    body: JSON.stringify(email),
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Problem beim Email-Versand');
   }
 }
