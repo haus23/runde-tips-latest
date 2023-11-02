@@ -1,5 +1,5 @@
 import type { DataFunctionArgs } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import { useFetcher } from '@remix-run/react';
 
 import {
   authenticate,
@@ -17,14 +17,15 @@ export async function action({ request }: DataFunctionArgs) {
 }
 
 export default function LoginRoute() {
-  const actionResponse = useActionData<typeof action>();
+  const authSubmission = useFetcher<typeof action>();
 
   return (
     <div>
       <h2>Anmeldung</h2>
-      {(!actionResponse || actionResponse.status === 'AWAIT_EMAIL') && (
-        <div>
-          <Form method="POST">
+      <div>
+        <authSubmission.Form method="POST">
+          {(!authSubmission.data ||
+            authSubmission.data.status === 'AWAIT_EMAIL') && (
             <input
               type="email"
               name="email"
@@ -32,10 +33,27 @@ export default function LoginRoute() {
               required
               placeholder="Bekannte Email-Adresse"
             ></input>
-          </Form>
-          {actionResponse && actionResponse.error && (
-            <span>{actionResponse.error}</span>
           )}
+          {authSubmission.data &&
+            authSubmission.data.status === 'AWAIT_TOTP' && (
+              <input
+                type="text"
+                name="totp"
+                autoComplete="one-time-code"
+                required
+                placeholder="Dein Login-Code"
+              ></input>
+            )}
+        </authSubmission.Form>
+        {authSubmission.data && authSubmission.data.error && (
+          <span>{authSubmission.data.error}</span>
+        )}
+      </div>
+      {authSubmission.state !== 'idle' && (
+        <div>
+          {authSubmission.data?.status === 'AWAIT_TOTP'
+            ? 'Code wird überprüft'
+            : 'Email wird geprüft'}
         </div>
       )}
     </div>
