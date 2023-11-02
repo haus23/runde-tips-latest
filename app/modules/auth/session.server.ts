@@ -4,7 +4,11 @@ type AuthSessionData = {
   sessionId?: string;
 };
 
-const authSession = createCookieSessionStorage<AuthSessionData>({
+type AuthFlashData = {
+  authEmail: string;
+};
+
+const authSession = createCookieSessionStorage<AuthSessionData, AuthFlashData>({
   cookie: {
     name: '__auth',
     sameSite: 'lax',

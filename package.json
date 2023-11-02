@@ -17,6 +17,8 @@
     "format": "prettier . --write"
   },
   "dependencies": {
+    "@epic-web/totp": "^1.1.1",
+    "@jsx-email/all": "^2.2.2",
     "@libsql/client": "^0.3.5",
     "@remix-run/node": "^2.1.0",
     "@remix-run/react": "^2.1.0",
