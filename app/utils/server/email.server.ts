@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { render } from '@jsx-email/all';
+import { renderAsync } from '@jsx-email/all';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -15,8 +15,8 @@ export async function sendEmail({
 }) {
   const from = 'hallo@runde.tips';
   const [html, text] = await Promise.all([
-    render(react),
-    render(react, { plainText: true }),
+    renderAsync(react),
+    renderAsync(react, { plainText: true }),
   ]);
   const email = {
     from,
