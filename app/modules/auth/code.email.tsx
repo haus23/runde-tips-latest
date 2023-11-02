@@ -4,6 +4,7 @@ import {
   Head,
   Html,
   Preview,
+  render,
   Section,
   Text,
 } from '@jsx-email/all';
@@ -45,21 +46,31 @@ const codeStyles = {
   fontWeight: '500',
 };
 
-export const CodeEmail = ({ username, code }: CodeEmailProps) => (
-  <Html>
-    <Head />
-    <Preview>
-      Hallo {username}, hier ist dein Login-Code: {code}
-    </Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Section style={box}>
-          <Text style={paragraph}>
-            Hallo {username}, dein Login-Code lautet:
-          </Text>
-          <Text style={codeStyles}>{code}</Text>
-        </Section>
-      </Container>
-    </Body>
-  </Html>
-);
+export function CodeEmail({ username, code }: CodeEmailProps) {
+  return (
+    <Html>
+      <Head />
+      <Preview>
+        Hallo {username}, hier ist dein Login-Code: {code}
+      </Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Section style={box}>
+            <Text style={paragraph}>
+              Hallo {username}, dein Login-Code lautet:
+            </Text>
+            <Text style={codeStyles}>{code}</Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  );
+}
+
+export function createCodeEmailBody(props: CodeEmailProps) {
+  const email = <CodeEmail {...props} />;
+  return {
+    html: render(email),
+    text: render(email, { plainText: true }),
+  };
+}
