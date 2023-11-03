@@ -7,19 +7,12 @@ import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
 import styles from '#app/styles.css';
 
-import { getUserId } from './modules/auth/auth.server';
-import { db } from './utils/server/db.server';
+import { getUser } from './modules/auth/auth.server';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const userId = await getUserId(request);
-  const user =
-    (userId &&
-      (await db.query.userTable.findFirst({
-        where: (user, { eq }) => eq(user.id, userId),
-      }))) ||
-    null;
+  const user = await getUser(request);
 
   return json({ user });
 }
