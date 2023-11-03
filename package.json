@@ -26,7 +26,6 @@
     "clsx": "^2.0.0",
     "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
-    "drizzle-valibot": "^0.1.1",
     "isbot": "^3.7.0",
     "ky": "^1.1.3",
     "react": "^18.2.0",
@@ -35,8 +34,7 @@
     "remix-auth-totp": "^1.2.0",
     "tailwind-merge": "^2.0.0",
     "tsx": "^3.14.0",
-    "type-fest": "^4.6.0",
-    "valibot": "^0.20.1"
+    "type-fest": "^4.6.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
