@@ -1,8 +1,8 @@
 import { redirect } from '@remix-run/node';
 
 import { invariant } from '#app/utils/invariant';
-import { db } from '#app/utils/server/db.server';
 
+import { getUserByEmail, getUserById } from '../db/model/users';
 import {
   commitSession,
   destroySession,
@@ -18,13 +18,7 @@ export async function getUserId(request: Request) {
 export async function getUser(request: Request) {
   const userId = await getUserId(request);
 
-  return (
-    (userId &&
-      (await db.query.userTable.findFirst({
-        where: (user, { eq }) => eq(user.id, userId),
-      }))) ||
-    null
-  );
+  return userId && (await getUserById(userId));
 }
 
 export async function requireAnonymous(request: Request) {
@@ -35,19 +29,14 @@ export async function requireAnonymous(request: Request) {
 }
 
 export async function isKnownEmail(email: string) {
-  const user = await db.query.userTable.findFirst({
-    where: (user, { eq }) => eq(user.email, email),
-  });
-
-  return user !== undefined;
+  const user = await getUserByEmail(email);
+  return user !== null;
 }
 
 export async function login(request: Request, email: string) {
   const session = await getSession(request.headers.get('Cookie'));
 
-  const user = await db.query.userTable.findFirst({
-    where: (user, { eq }) => eq(user.email, email),
-  });
+  const user = await getUserByEmail(email);
   invariant(user, 'Unknown authenticated user.');
 
   session.set('user:id', user.id);
