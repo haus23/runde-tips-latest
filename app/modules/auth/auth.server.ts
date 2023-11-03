@@ -29,7 +29,7 @@ export async function requireAnonymous(request: Request) {
   }
 }
 
-export async function validateEmail(email: string) {
+export async function isKnownEmail(email: string) {
   const user = await db.query.userTable.findFirst({
     where: (user, { eq }) => eq(user.email, email),
   });
