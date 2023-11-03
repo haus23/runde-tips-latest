@@ -56,7 +56,7 @@ export async function action({ request }: DataFunctionArgs) {
   const user = await getUserByEmail(submission.value.email);
   invariant(user, 'Unknown authenticated user.');
 
-  const code = generateLoginCode(submission.value.email);
+  const { code, secret } = generateLoginCode();
   const body = createCodeEmailContent({ username: user.name, code });
   const smtpResult = await sendEmail({
     to: `${user.name} <${user.email}>`,
@@ -70,6 +70,7 @@ export async function action({ request }: DataFunctionArgs) {
 
   const session = await getSession(request.headers.get('Cookie'));
   session.flash('auth:email', submission.value.email);
+  session.flash('auth:secret', secret);
 
   return redirect('/onboarding', {
     headers: {

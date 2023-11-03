@@ -5,10 +5,7 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
-import {
-  commitSession,
-  getSession,
-} from '#app/modules/auth/auth-session.server';
+import { getSession } from '#app/modules/auth/auth-session.server';
 import { login } from '#app/modules/auth/auth.server';
 import { validateLoginCode } from '#app/utils/server/totp.server';
 
@@ -45,7 +42,8 @@ export async function action({ request }: DataFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
 
   const email = session.get('auth:email');
-  if (!email) {
+  const secret = session.get('auth:secret');
+  if (!email || !secret) {
     return redirect('/login');
   }
 
@@ -54,7 +52,7 @@ export async function action({ request }: DataFunctionArgs) {
   const submission = await parse(formData, {
     schema: createFormSchema({
       isValidCode: async (code) => {
-        return validateLoginCode(email, code);
+        return validateLoginCode(code, secret);
       },
     }),
     async: true,

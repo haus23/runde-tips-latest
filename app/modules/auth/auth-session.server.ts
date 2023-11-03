@@ -6,6 +6,7 @@ type SessionUser = {
 
 type FlashData = {
   'auth:email': string;
+  'auth:secret': string;
 };
 
 export const authSession = createCookieSessionStorage<SessionUser, FlashData>({

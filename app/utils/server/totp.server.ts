@@ -6,22 +6,17 @@ const TOTP_DEFAULTS = {
   algorithm: 'SHA256',
 };
 
-export function generateLoginCode(email: string) {
-  const { otp } = generateTOTP({
-    secret: base32.encode(
-      new TextEncoder().encode(`${email}#${process.env.APP_SECRET}`),
-    ),
+export function generateLoginCode() {
+  const { otp, secret } = generateTOTP({
     ...TOTP_DEFAULTS,
   });
-  return otp;
+  return { code: otp, secret };
 }
 
-export function validateLoginCode(email: string, code: string) {
+export function validateLoginCode(code: string, secret: string) {
   const result = verifyTOTP({
     otp: code,
-    secret: base32.encode(
-      new TextEncoder().encode(`${email}#${process.env.APP_SECRET}`),
-    ),
+    secret,
     ...TOTP_DEFAULTS,
   });
   return result !== null;
