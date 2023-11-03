@@ -6,7 +6,7 @@ import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
 import { getSession } from '#app/modules/auth/auth-session.server';
-import { login } from '#app/modules/auth/auth.server';
+import { login, requireAnonymous } from '#app/modules/auth/auth.server';
 import { validateLoginCode } from '#app/utils/server/totp.server';
 
 function createFormSchema(constraint?: {
@@ -28,6 +28,7 @@ function createFormSchema(constraint?: {
 }
 
 export async function loader({ request }: DataFunctionArgs) {
+  await requireAnonymous(request);
   const session = await getSession(request.headers.get('Cookie'));
 
   const email = session.get('auth:email');
