@@ -1,25 +1,39 @@
 import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import { Form, useActionData, useLoaderData } from '@remix-run/react';
 
 import { conform, useForm } from '@conform-to/react';
-import { parse } from '@conform-to/zod';
+import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
 import {
   commitSession,
   getSession,
 } from '#app/modules/auth/auth-session.server';
+import { validateLoginCode } from '#app/utils/server/totp.server';
 
-const schema = z.object({
-  code: z
-    .string({ required_error: 'Ohne Code geht es nicht weiter.' })
-    .regex(/\d{5}/, 'Kein Code. Ein Code hat genau sechs Ziffern.'),
-});
+function createFormSchema(constraint?: {
+  isValidCode?: (code: string) => Promise<boolean>;
+}) {
+  return z.object({
+    code: z
+      .string({ required_error: 'Ohne Code geht es nicht weiter.' })
+      .regex(/\d{5}/, 'Kein Code. Ein Code hat genau sechs Ziffern.')
+      .pipe(
+        z.string().superRefine((code, ctx) =>
+          refine(ctx, {
+            validate: () => constraint?.isValidCode?.(code),
+            message: 'Ungültiger Code.',
+          }),
+        ),
+      ),
+  });
+}
 
 export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
 
-  if (!session.has('auth:email')) {
+  const email = session.get('auth:email');
+  if (!email) {
     return redirect('/login');
   }
 
@@ -28,11 +42,22 @@ export async function loader({ request }: DataFunctionArgs) {
 
 export async function action({ request }: DataFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
-  const authEmail = session.get('auth:email');
+
+  const email = session.get('auth:email');
+  if (!email) {
+    return redirect('/login');
+  }
 
   const formData = await request.formData();
 
-  const submission = parse(formData, { schema });
+  const submission = await parse(formData, {
+    schema: createFormSchema({
+      isValidCode: async (code) => {
+        return validateLoginCode(email, code);
+      },
+    }),
+    async: true,
+  });
 
   if (submission.intent !== 'submit' || !submission.value) {
     return json(submission);
@@ -52,7 +77,7 @@ export default function OnboardingRoute() {
     id: 'totp',
     lastSubmission,
     onValidate({ formData }) {
-      return parse(formData, { schema });
+      return parse(formData, { schema: createFormSchema() });
     },
   });
 

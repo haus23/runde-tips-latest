@@ -10,8 +10,9 @@ import {
   getSession,
 } from '#app/modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#app/modules/auth/auth.server';
+import { generateLoginCode } from '#app/utils/server/totp.server';
 
-function createLoginSchema(constraint?: {
+function createFormSchema(constraint?: {
   isKnownEmail?: (email: string) => Promise<boolean>;
 }) {
   return z.object({
@@ -40,13 +41,16 @@ export async function action({ request }: DataFunctionArgs) {
   const formData = await request.formData();
 
   const submission = await parse(formData, {
-    schema: createLoginSchema({ isKnownEmail }),
+    schema: createFormSchema({ isKnownEmail }),
     async: true,
   });
 
   if (submission.intent !== 'submit' || !submission.value) {
     return json(submission);
   }
+
+  const code = generateLoginCode(submission.value.email);
+  console.log(code);
 
   const session = await getSession(request.headers.get('Cookie'));
   session.flash('auth:email', submission.value.email);
@@ -66,7 +70,7 @@ export default function LoginRoute() {
     id: 'login',
     lastSubmission,
     onValidate({ formData }) {
-      return parse(formData, { schema: createLoginSchema() });
+      return parse(formData, { schema: createFormSchema() });
     },
     defaultValue: { email },
   });
@@ -80,7 +84,7 @@ export default function LoginRoute() {
           <input {...conform.input(fields.email, { type: 'email' })} />
           <div id={fields.email.errorId}>{fields.email.errors}</div>
         </div>
-        <button>Login Code anfordern</button>
+        <button>Login-Code anfordern</button>
       </Form>
     </div>
   );
