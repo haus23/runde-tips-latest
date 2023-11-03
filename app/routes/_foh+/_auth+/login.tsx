@@ -1,10 +1,14 @@
 import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import { Form, useActionData, useLoaderData } from '@remix-run/react';
 
 import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
+import {
+  commitSession,
+  getSession,
+} from '#app/modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#app/modules/auth/auth.server';
 
 function createLoginSchema(constraint?: {
@@ -27,7 +31,9 @@ function createLoginSchema(constraint?: {
 
 export async function loader({ request }: DataFunctionArgs) {
   await requireAnonymous(request);
-  return null;
+
+  const session = await getSession(request.headers.get('Cookie'));
+  return json({ email: session.get('auth:email') });
 }
 
 export async function action({ request }: DataFunctionArgs) {
@@ -42,17 +48,27 @@ export async function action({ request }: DataFunctionArgs) {
     return json(submission);
   }
 
-  return redirect('/');
+  const session = await getSession(request.headers.get('Cookie'));
+  session.flash('auth:email', submission.value.email);
+
+  return redirect('/onboarding', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
 }
 
 export default function LoginRoute() {
+  const { email } = useLoaderData<typeof loader>();
   const lastSubmission = useActionData<typeof action>();
+
   const [form, fields] = useForm({
     id: 'login',
     lastSubmission,
     onValidate({ formData }) {
       return parse(formData, { schema: createLoginSchema() });
     },
+    defaultValue: { email },
   });
 
   return (
