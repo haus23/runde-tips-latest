@@ -28,3 +28,11 @@ export async function requireAnonymous(request: Request) {
     throw redirect('/');
   }
 }
+
+export async function validateEmail(email: string) {
+  const user = await db.query.userTable.findFirst({
+    where: (user, { eq }) => eq(user.email, email),
+  });
+
+  return user !== undefined;
+}
