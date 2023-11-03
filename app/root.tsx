@@ -1,9 +1,28 @@
-import { type LinksFunction } from '@remix-run/node';
+import {
+  json,
+  type LinksFunction,
+  type LoaderFunctionArgs,
+} from '@remix-run/node';
 import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
 import styles from '#app/styles.css';
 
+import { getUserId } from './modules/auth/auth.server';
+import { db } from './utils/server/db.server';
+
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const userId = await getUserId(request);
+  const user =
+    (userId &&
+      (await db.query.userTable.findFirst({
+        where: (user, { eq }) => eq(user.id, userId),
+      }))) ||
+    null;
+
+  return json({ user });
+}
 
 export default function App() {
   return (

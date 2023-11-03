@@ -3,9 +3,12 @@ import { Link, NavLink, useParams } from '@remix-run/react';
 import { ChampionshipSelect } from '#app/components/championship-select';
 import { Icon } from '#app/components/icon';
 import { Logo } from '#app/components/logo';
+import { UserMenu } from '#app/components/user-menu';
+import { useIsAuthenticated } from '#app/utils/user';
 
 export function FohHeader() {
   const { championship = '' } = useParams();
+  const isAuthenticated = useIsAuthenticated();
 
   return (
     <header className="flex h-16 items-center justify-between border-b bg-white px-2 shadow sm:px-4">
@@ -35,9 +38,13 @@ export function FohHeader() {
       </div>
       <div className="flex gap-x-2">
         <ChampionshipSelect />
-        <Link unstable_viewTransition to="/login">
-          <Icon name="avatar" />
-        </Link>
+        {isAuthenticated ? (
+          <UserMenu />
+        ) : (
+          <Link unstable_viewTransition to="/login">
+            <Icon name="avatar" />
+          </Link>
+        )}
       </div>
     </header>
   );
