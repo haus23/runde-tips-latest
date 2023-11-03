@@ -42,6 +42,7 @@ const codeStyles = {
   textAlign: 'center' as const,
   fontFamily: 'monospace',
   fontSize: '32px',
+  letterSpacing: '0.1em',
   marginTop: '16px',
   fontWeight: '500',
 };

@@ -54,17 +54,6 @@ export const totpTable = sqliteTable('totps', {
   expiresAt: text('expires_at').default(''),
 });
 
-export const sessionTable = sqliteTable('sessions', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => nanoid()),
-
-  expirationDate: text('expiration_date'),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => userTable.id),
-});
-
 export const playerTable = sqliteTable('players', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
 

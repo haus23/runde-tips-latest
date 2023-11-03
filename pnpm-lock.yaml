@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@epic-web/totp':
-    specifier: ^1.1.1
-    version: 1.1.1
   '@jsx-email/all':
     specifier: ^2.2.2
     version: 2.2.2(@types/react@18.2.29)(react@18.2.0)
