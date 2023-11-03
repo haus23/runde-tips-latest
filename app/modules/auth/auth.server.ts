@@ -1,8 +1,13 @@
 import { redirect } from '@remix-run/node';
 
+import { invariant } from '#app/utils/invariant';
 import { db } from '#app/utils/server/db.server';
 
-import { getSession } from './auth-session.server';
+import {
+  commitSession,
+  destroySession,
+  getSession,
+} from './auth-session.server';
 
 export async function getUserId(request: Request) {
   const session = await getSession(request.headers.get('Cookie'));
@@ -35,4 +40,29 @@ export async function isKnownEmail(email: string) {
   });
 
   return user !== undefined;
+}
+
+export async function login(request: Request, email: string) {
+  const session = await getSession(request.headers.get('Cookie'));
+
+  const user = await db.query.userTable.findFirst({
+    where: (user, { eq }) => eq(user.email, email),
+  });
+  invariant(user, 'Unknown authenticated user.');
+
+  session.set('user:id', user.id);
+
+  return redirect('/', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+export async function logout(request: Request) {
+  const session = await getSession(request.headers.get('Cookie'));
+
+  return redirect('/', {
+    headers: { 'Set-Cookie': await destroySession(session) },
+  });
 }

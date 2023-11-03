@@ -1,5 +1,5 @@
 import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
-import { Form, useActionData, useLoaderData } from '@remix-run/react';
+import { Form, useActionData } from '@remix-run/react';
 
 import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
@@ -9,6 +9,7 @@ import {
   commitSession,
   getSession,
 } from '#app/modules/auth/auth-session.server';
+import { login } from '#app/modules/auth/auth.server';
 import { validateLoginCode } from '#app/utils/server/totp.server';
 
 function createFormSchema(constraint?: {
@@ -63,11 +64,7 @@ export async function action({ request }: DataFunctionArgs) {
     return json(submission);
   }
 
-  return redirect('/', {
-    headers: {
-      'Set-Cookie': await commitSession(session),
-    },
-  });
+  return login(request, email);
 }
 
 export default function OnboardingRoute() {
