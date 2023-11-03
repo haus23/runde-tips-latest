@@ -17,7 +17,7 @@ function createFormSchema(constraint?: {
   return z.object({
     code: z
       .string({ required_error: 'Ohne Code geht es nicht weiter.' })
-      .regex(/\d{5}/, 'Kein Code. Ein Code hat genau sechs Ziffern.')
+      .regex(/^\d{6}$/, 'Kein Code. Ein Code hat genau sechs Ziffern.')
       .pipe(
         z.string().superRefine((code, ctx) =>
           refine(ctx, {
