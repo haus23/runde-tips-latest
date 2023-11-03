@@ -1,6 +1,44 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.3...v0.1.4)
+
+### 🚀 Enhancements
+
+- Handle anonymous users. ([1e43f50](https://github.com/haus23/runde-tips/commit/1e43f50))
+- Add email validation against registered users. ([fe8cb98](https://github.com/haus23/runde-tips/commit/fe8cb98))
+- Integrate conform to simplify form handling and validation. ([4927ed3](https://github.com/haus23/runde-tips/commit/4927ed3))
+- Add onboarding route. Control flow with session value. ([24b6581](https://github.com/haus23/runde-tips/commit/24b6581))
+- Sketch the onboarding flow. ([b9374e9](https://github.com/haus23/runde-tips/commit/b9374e9))
+- Generate and validate one time password. ([2479b83](https://github.com/haus23/runde-tips/commit/2479b83))
+- Implement login/logout. ([9cb2b99](https://github.com/haus23/runde-tips/commit/9cb2b99))
+- Send email with totp. ([a17b1f4](https://github.com/haus23/runde-tips/commit/a17b1f4))
+- Increase security by using unpredictable secrets. ([8b82e8e](https://github.com/haus23/runde-tips/commit/8b82e8e))
+- Start with role based features. ([d63213e](https://github.com/haus23/runde-tips/commit/d63213e))
+
+### 🩹 Fixes
+
+- Wrong regex used. ([a31878e](https://github.com/haus23/runde-tips/commit/a31878e))
+- Add hints for code input. ([649d7e3](https://github.com/haus23/runde-tips/commit/649d7e3))
+- Redirect from onboarding route if already logged in. ([4836ddc](https://github.com/haus23/runde-tips/commit/4836ddc))
+
+### 💅 Refactors
+
+- Be more precise with util modules. ([cad5d9f](https://github.com/haus23/runde-tips/commit/cad5d9f))
+- Drop valibot dependency for now. And simplify assertions. ([2c516b9](https://github.com/haus23/runde-tips/commit/2c516b9))
+- Simplify root loader. ([60c881a](https://github.com/haus23/runde-tips/commit/60c881a))
+- Create new db module ([6276e43](https://github.com/haus23/runde-tips/commit/6276e43))
+
+### 🏡 Chore
+
+- Remove current auth flow. ([dc2a6c3](https://github.com/haus23/runde-tips/commit/dc2a6c3))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.3
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.2...v0.1.3)

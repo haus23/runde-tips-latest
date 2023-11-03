@@ -1,62 +1,109 @@
-import { json, type DataFunctionArgs } from '@remix-run/node';
-import { Form, useLoaderData } from '@remix-run/react';
+import { json, redirect, type DataFunctionArgs } from '@remix-run/node';
+import { Form, useActionData, useLoaderData } from '@remix-run/react';
+
+import { conform, useForm } from '@conform-to/react';
+import { parse, refine } from '@conform-to/zod';
+import { z } from 'zod';
 
 import {
   commitSession,
   getSession,
 } from '#app/modules/auth/auth-session.server';
-import { authenticator } from '#app/modules/auth/auth.server';
+import { isKnownEmail, requireAnonymous } from '#app/modules/auth/auth.server';
+import { createCodeEmailContent } from '#app/modules/auth/code.email';
+import { getUserByEmail } from '#app/modules/db/model/users';
+import { invariant } from '#app/utils/invariant';
+import { sendEmail } from '#app/utils/server/email.server';
+import { generateLoginCode } from '#app/utils/server/totp.server';
 
-export async function loader({ request }: DataFunctionArgs) {
-  await authenticator.isAuthenticated(request, { successRedirect: '/' });
-
-  const session = await getSession(request.headers.get('Cookie'));
-  const authEmail = session.get('auth:email');
-  const authError = session.get(authenticator.sessionErrorKey);
-
-  return json(
-    { authEmail, authError },
-    {
-      headers: {
-        'set-cookie': await commitSession(session),
-      },
-    },
-  );
-}
-
-export async function action({ request }: DataFunctionArgs) {
-  await authenticator.authenticate('TOTP', request, {
-    successRedirect: '/login',
-    failureRedirect: '/login',
+function createFormSchema(constraint?: {
+  isKnownEmail?: (email: string) => Promise<boolean>;
+}) {
+  return z.object({
+    email: z
+      .string({ required_error: 'Email-Adresse ist notwendig.' })
+      .email('Ungültige Email-Adresse.')
+      .pipe(
+        z.string().superRefine((email, ctx) =>
+          refine(ctx, {
+            validate: () => constraint?.isKnownEmail?.(email),
+            message: 'Unbekannte Email-Adresse.',
+          }),
+        ),
+      ),
   });
 }
 
+export async function loader({ request }: DataFunctionArgs) {
+  await requireAnonymous(request);
+
+  const session = await getSession(request.headers.get('Cookie'));
+  return json({ email: session.get('auth:email') });
+}
+
+export async function action({ request }: DataFunctionArgs) {
+  const formData = await request.formData();
+
+  const submission = await parse(formData, {
+    schema: createFormSchema({ isKnownEmail }),
+    async: true,
+  });
+
+  if (submission.intent !== 'submit' || !submission.value) {
+    return json(submission);
+  }
+
+  const user = await getUserByEmail(submission.value.email);
+  invariant(user, 'Unknown authenticated user.');
+
+  const { code, secret } = generateLoginCode();
+  const body = createCodeEmailContent({ username: user.name, code });
+  const smtpResult = await sendEmail({
+    to: `${user.name} <${user.email}>`,
+    subject: 'Tipprunde Login Code',
+    ...body,
+  });
+
+  if (smtpResult.status === 'error') {
+    throw new Error('Probleme beim Email-Versand.');
+  }
+
+  const session = await getSession(request.headers.get('Cookie'));
+  session.flash('auth:email', submission.value.email);
+  session.flash('auth:secret', secret);
+
+  return redirect('/onboarding', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+function CodeEmail() {}
 export default function LoginRoute() {
-  const { authEmail, authError } = useLoaderData<typeof loader>();
+  const { email } = useLoaderData<typeof loader>();
+  const lastSubmission = useActionData<typeof action>();
+
+  const [form, fields] = useForm({
+    id: 'login',
+    lastSubmission,
+    onValidate({ formData }) {
+      return parse(formData, { schema: createFormSchema() });
+    },
+    defaultValue: { email },
+  });
 
   return (
     <div>
       <h2>Anmeldung</h2>
-      <Form method="POST">
-        {!authEmail && (
-          <input
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="Deine Email-Adresse"
-          ></input>
-        )}
-        {authEmail && (
-          <input
-            type="text"
-            name="code"
-            autoComplete="one-time-code"
-            inputMode="numeric"
-            placeholder="Dein Login-Code"
-          ></input>
-        )}
+      <Form method="post" {...form.props}>
+        <div>
+          <label htmlFor={fields.email.id}>Email</label>
+          <input {...conform.input(fields.email, { type: 'email' })} />
+          <div id={fields.email.errorId}>{fields.email.errors}</div>
+        </div>
+        <button>Login-Code anfordern</button>
       </Form>
-      {authError && JSON.stringify(authError)}
     </div>
   );
 }

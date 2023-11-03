@@ -68,7 +68,7 @@ export function CodeEmail({ username, code }: CodeEmailProps) {
   );
 }
 
-export function createCodeEmailBody(props: CodeEmailProps) {
+export function createCodeEmailContent(props: CodeEmailProps) {
   const email = <CodeEmail {...props} />;
   return {
     html: render(email),

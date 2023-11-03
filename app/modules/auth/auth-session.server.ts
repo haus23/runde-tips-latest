@@ -1,6 +1,15 @@
 import { createCookieSessionStorage } from '@remix-run/node';
 
-export const authSession = createCookieSessionStorage({
+type SessionUser = {
+  'user:id': number;
+};
+
+type FlashData = {
+  'auth:email': string;
+  'auth:secret': string;
+};
+
+export const authSession = createCookieSessionStorage<SessionUser, FlashData>({
   cookie: {
     name: '__auth',
     sameSite: 'lax',

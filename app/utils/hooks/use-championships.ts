@@ -1,25 +1,21 @@
 import { useParams, useRouteLoaderData } from '@remix-run/react';
 
-import { array, parse } from 'valibot';
-
 import type { loader } from '#app/routes/_foh+/_layout/_foh-layout';
-import { Championship } from '#db/model';
+
+import { invariant } from '../invariant';
 
 export function useChampionships() {
   const { championship: slug = '' } = useParams();
 
-  const championshipsData = useRouteLoaderData<typeof loader>(
+  const championships = useRouteLoaderData<typeof loader>(
     'routes/_foh+/_layout/_foh-layout',
   );
-  const championships = parse(array(Championship), championshipsData);
+  invariant(championships, 'Unexcpected undefined championships');
 
   const current = slug
     ? championships.find((c) => c.slug === slug)
     : championships[0];
-
-  if (!current) {
-    throw new Error('No championship found');
-  }
+  invariant(current, 'No championship found');
 
   return { championships, current };
 }
