@@ -1,6 +1,50 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- Add reusable icon component. ([9654d11](https://github.com/haus23/runde-tips/commit/9654d11))
+- Simplify again the routing. Resolves #3. Drop aria components by now. ([#3](https://github.com/haus23/runde-tips/issues/3))
+- Send emails via resend. ([95b5509](https://github.com/haus23/runde-tips/commit/95b5509))
+- Implemented auth flow. Little bit quirky. Resolves #4 ([#4](https://github.com/haus23/runde-tips/issues/4))
+- **auth:** Require an email address. ([5f7c726](https://github.com/haus23/runde-tips/commit/5f7c726))
+- **auth:** Validate email address. ([1720b51](https://github.com/haus23/runde-tips/commit/1720b51))
+- **auth:** Create TOTP and send with email. ([ee25b6d](https://github.com/haus23/runde-tips/commit/ee25b6d))
+- **auth:** Basic auth flow implemented. See #5 ([#5](https://github.com/haus23/runde-tips/issues/5))
+- Re-Implement sending emails. ([423dfd1](https://github.com/haus23/runde-tips/commit/423dfd1))
+- Finally implement basic auth flow. Resolves #4 and #5 ([#4](https://github.com/haus23/runde-tips/issues/4), [#5](https://github.com/haus23/runde-tips/issues/5))
+
+### 🩹 Fixes
+
+- Use new valibot api. Not zod any more. ([dcd5906](https://github.com/haus23/runde-tips/commit/dcd5906))
+- Remove remaining aria link and fix the link. ([c36335c](https://github.com/haus23/runde-tips/commit/c36335c))
+- Remove (by now) aria components. ([00a5686](https://github.com/haus23/runde-tips/commit/00a5686))
+- Set name attribute and use viewTransition API ([d519975](https://github.com/haus23/runde-tips/commit/d519975))
+- Add viewTransition API ([50194b4](https://github.com/haus23/runde-tips/commit/50194b4))
+- Use async methods. ([9d6c82a](https://github.com/haus23/runde-tips/commit/9d6c82a))
+
+### 💅 Refactors
+
+- Drop resend npm package and use web api. ([20a9e1d](https://github.com/haus23/runde-tips/commit/20a9e1d))
+- Clean up. Remove all auth related code. ([95cdc1e](https://github.com/haus23/runde-tips/commit/95cdc1e))
+- Rename and add email body factory ([3172946](https://github.com/haus23/runde-tips/commit/3172946))
+
+### 🏡 Chore
+
+- **dx:** Revert image tagging. ([904be3b](https://github.com/haus23/runde-tips/commit/904be3b))
+- **dx:** Add class name helpers. ([72bd2f5](https://github.com/haus23/runde-tips/commit/72bd2f5))
+- **auth:** Add totp and session table. ([f10b513](https://github.com/haus23/runde-tips/commit/f10b513))
+- **auth:** Create session. ([1186373](https://github.com/haus23/runde-tips/commit/1186373))
+- Upgrade all deps. ([024f7cd](https://github.com/haus23/runde-tips/commit/024f7cd))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.2
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.1...v0.1.2)
