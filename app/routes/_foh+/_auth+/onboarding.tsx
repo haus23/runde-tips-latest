@@ -84,7 +84,11 @@ export default function OnboardingRoute() {
       <Form method="post" {...form.props}>
         <div>
           <label htmlFor={fields.code.id}>Code</label>
-          <input {...conform.input(fields.code, {})} />
+          <input
+            {...conform.input(fields.code)}
+            autoComplete="one-time-code"
+            inputMode="numeric"
+          />
           <div id={fields.code.errorId}>{fields.code.errors}</div>
         </div>
         <button>Anmelden</button>
