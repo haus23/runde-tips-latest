@@ -10,6 +10,10 @@ import {
   getSession,
 } from '#app/modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#app/modules/auth/auth.server';
+import { createCodeEmailContent } from '#app/modules/auth/code.email';
+import { getUserByEmail } from '#app/modules/db/model/users';
+import { invariant } from '#app/utils/invariant';
+import { sendEmail } from '#app/utils/server/email.server';
 import { generateLoginCode } from '#app/utils/server/totp.server';
 
 function createFormSchema(constraint?: {
@@ -49,8 +53,20 @@ export async function action({ request }: DataFunctionArgs) {
     return json(submission);
   }
 
+  const user = await getUserByEmail(submission.value.email);
+  invariant(user, 'Unknown authenticated user.');
+
   const code = generateLoginCode(submission.value.email);
-  console.log(code);
+  const body = createCodeEmailContent({ username: user.name, code });
+  const smtpResult = await sendEmail({
+    to: `${user.name} <${user.email}>`,
+    subject: 'Tipprunde Login Code',
+    ...body,
+  });
+
+  if (smtpResult.status === 'error') {
+    throw new Error('Probleme beim Email-Versand.');
+  }
 
   const session = await getSession(request.headers.get('Cookie'));
   session.flash('auth:email', submission.value.email);
@@ -62,6 +78,7 @@ export async function action({ request }: DataFunctionArgs) {
   });
 }
 
+function CodeEmail() {}
 export default function LoginRoute() {
   const { email } = useLoaderData<typeof loader>();
   const lastSubmission = useActionData<typeof action>();
