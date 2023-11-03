@@ -17,6 +17,7 @@
     "format": "prettier . --write"
   },
   "dependencies": {
+    "@jsx-email/all": "^2.2.2",
     "@libsql/client": "^0.3.5",
     "@remix-run/node": "^2.1.0",
     "@remix-run/react": "^2.1.0",
@@ -28,12 +29,14 @@
     "drizzle-valibot": "^0.1.1",
     "isbot": "^3.7.0",
     "ky": "^1.1.0",
+    "nanoid": "^5.0.2",
     "react": "^18.2.0",
-    "react-aria": "^3.29.1",
-    "react-aria-components": "1.0.0-beta.2",
     "react-dom": "^18.2.0",
+    "remix-auth": "^3.6.0",
+    "remix-auth-totp": "^1.2.0",
     "tailwind-merge": "^1.14.0",
     "tsx": "^3.14.0",
+    "type-fest": "^4.6.0",
     "valibot": "^0.19.0"
   },
   "devDependencies": {
