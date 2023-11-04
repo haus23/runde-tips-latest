@@ -4,6 +4,7 @@ import { Outlet } from '@remix-run/react';
 import { db } from '#app/modules/db/db.server';
 
 import { FohHeader } from './header';
+import { Notifications } from './notifications';
 
 export async function loader() {
   const championships = await db.query.championshipTable.findMany({
@@ -21,6 +22,8 @@ export default function FohLayout() {
       <main className="mx-auto mt-4 max-w-5xl pb-10 sm:mt-6 sm:px-6 lg:px-8">
         <Outlet />
       </main>
+      <aside></aside>
+      <Notifications />
     </>
   );
 }

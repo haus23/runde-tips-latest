@@ -1,5 +1,4 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
-import { base32 } from '@scure/base';
 
 const TOTP_DEFAULTS = {
   period: 120,
