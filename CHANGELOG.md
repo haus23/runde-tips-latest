@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.5
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.4...v0.1.5)
+
+### 🚀 Enhancements
+
+- Add realtime feature via Server Sent Events. Proof of concept. ([8f1ce82](https://github.com/haus23/runde-tips/commit/8f1ce82))
+
+### 🏡 Chore
+
+- Drop now unused remix-auth deps ([1c60493](https://github.com/haus23/runde-tips/commit/1c60493))
+- Drop now unused base32 implementation. ([7d083ff](https://github.com/haus23/runde-tips/commit/7d083ff))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.4
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.3...v0.1.4)
