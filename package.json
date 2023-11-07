@@ -37,7 +37,6 @@
     "sonner": "^1.1.0",
     "tailwind-merge": "^2.0.0",
     "tsx": "^3.14.0",
-    "type-fest": "^4.6.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

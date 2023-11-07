@@ -1,15 +1,9 @@
-import { type RequireAtLeastOne } from 'type-fest';
-
-type EmailProps = {
+export async function sendEmail(options: {
   to: string;
   subject: string;
-  html?: string;
-  text?: string;
-};
-
-export async function sendEmail({
-  ...options
-}: RequireAtLeastOne<EmailProps, 'text' | 'html'>) {
+  html: string;
+  text: string;
+}) {
   const from = 'hallo@runde.tips';
 
   const email = {
