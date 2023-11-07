@@ -1,18 +1,14 @@
 import { json } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
-import { db } from '#app/modules/db/db.server';
+import { getPublishedChampionships } from '#modules/api/model/championships.server';
 
 import { FohHeader } from './header';
 import { Notifications } from './notifications';
 
 export async function loader() {
-  const championships = await db.query.championshipTable.findMany({
-    where: (championship, { eq }) => eq(championship.published, true),
-    orderBy: (championship, { desc }) => [desc(championship.nr)],
-  });
-
-  return json(championships);
+  const championships = await getPublishedChampionships();
+  return json({ championships });
 }
 
 export default function FohLayout() {

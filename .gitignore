@@ -11,3 +11,6 @@ public/build/
 
 # SQLite DBs
 data/*.db
+
+# Temporary local files/copies
+*.local.*

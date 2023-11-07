@@ -1,10 +1,10 @@
 import { Link, NavLink, useParams } from '@remix-run/react';
 
-import { ChampionshipSelect } from '#app/components/championship-select';
-import { Icon } from '#app/components/icon';
-import { Logo } from '#app/components/logo';
-import { UserMenu } from '#app/components/user-menu';
-import { useIsAuthenticated } from '#app/utils/user';
+import { ChampionshipSelect } from '#components/championship-select';
+import { Icon } from '#components/icon';
+import { Logo } from '#components/logo';
+import { UserMenu } from '#components/user-menu';
+import { useIsAuthenticated } from '#utils/auth/user';
 
 export function FohHeader() {
   const { championship = '' } = useParams();

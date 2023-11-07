@@ -1,7 +1,7 @@
 import ky from 'ky';
 
-import { drizzleInstance as db } from '#db/drizzle.instance';
-import { userTable } from '#db/schema';
+import { drizzleInstance as db } from '#modules/api/orm/drizzle.instance';
+import { userTable } from '#modules/api/orm/schema';
 
 export async function seedUsers() {
   const users = await ky

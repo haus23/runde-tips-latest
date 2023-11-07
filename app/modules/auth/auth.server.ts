@@ -1,8 +1,8 @@
 import { redirect } from '@remix-run/node';
 
-import { invariant } from '#app/utils/invariant';
+import { getUserByEmail, getUserById } from '#modules/api/model/users.server';
+import { invariant } from '#utils/invariant';
 
-import { getUserByEmail, getUserById } from '../db/model/users';
 import {
   commitSession,
   destroySession,

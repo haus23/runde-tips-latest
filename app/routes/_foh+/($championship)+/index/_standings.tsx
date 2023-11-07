@@ -1,38 +1,22 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData, useParams } from '@remix-run/react';
 
-import { db } from '#app/modules/db/db.server';
+import { getRankedPlayers } from '#modules/api/model/players.server';
+import { useChampionship } from '#utils/foh/use-championship';
 
 export const handle = { viewPath: '' };
 
 export async function loader({ params }: DataFunctionArgs) {
   const { championship: slug } = params;
 
-  const championship = await db.query.championshipTable.findFirst({
-    where: (championship, { eq, and }) =>
-      and(
-        eq(championship.published, true),
-        slug ? eq(championship.slug, slug) : undefined,
-      ),
-    orderBy: (championship, { desc }) => [desc(championship.nr)],
-  });
-
-  if (!championship) {
-    throw new Error('No championship found');
-  }
-
-  const ranking = await db.query.playerTable.findMany({
-    where: (player, { eq }) => eq(player.championshipId, championship.id),
-    orderBy: (player, { asc }) => [asc(player.rank)],
-    with: { user: { columns: { name: true, slug: true } } },
-  });
-
-  return json({ championship, ranking });
+  const ranking = await getRankedPlayers(slug);
+  return json({ ranking });
 }
 
 export default function StandingsRoute() {
-  const { championship, ranking } = useLoaderData<typeof loader>();
   const { championship: championshipSlug = '' } = useParams();
+  const championship = useChampionship();
+  const { ranking } = useLoaderData<typeof loader>();
 
   return (
     <div>

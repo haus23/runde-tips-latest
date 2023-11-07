@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm';
 import ky from 'ky';
 
-import { drizzleInstance as db } from '#db/drizzle.instance';
-import { championshipTable, rulesetTable } from '#db/schema';
+import { drizzleInstance as db } from '#modules/api/orm/drizzle.instance';
+import { championshipTable, rulesetTable } from '#modules/api/orm/schema';
 
 import { seedPlayers } from './championship/players';
 

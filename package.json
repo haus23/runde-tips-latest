@@ -5,15 +5,15 @@
   "license": "MIT",
   "type": "module",
   "imports": {
-    "#*": "./*"
+    "#*": "./app/*"
   },
   "scripts": {
     "dev": "remix dev",
     "build": "remix build",
     "start": "remix-serve ./build/index.js",
-    "db:push": "drizzle-kit push:sqlite --config db/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config db/drizzle.config.ts --port 3030 --host 127.0.0.1",
-    "db:seed": "tsx --env-file=.env db/seed",
+    "db:push": "drizzle-kit push:sqlite --config app/modules/api/orm/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config app/modules/api/orm/drizzle.config.ts --port 3030 --host 127.0.0.1",
+    "db:seed": "tsx --env-file=.env app/modules/api/orm/seed",
     "format": "prettier . --write"
   },
   "dependencies": {
@@ -29,25 +29,27 @@
     "clsx": "^2.0.0",
     "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
+    "drizzle-zod": "^0.5.1",
     "isbot": "^3.7.0",
     "ky": "^1.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remix-flat-routes": "^0.6.2",
     "remix-utils": "^7.1.0",
     "sonner": "^1.1.0",
     "tailwind-merge": "^2.0.0",
+    "tailwindcss": "^3.3.5",
     "tsx": "^3.14.0",
-    "type-fest": "^4.6.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@remix-run/dev": "^2.2.0",
     "@types/react": "^18.2.34",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
-    "remix-flat-routes": "^0.6.2",
-    "tailwindcss": "^3.3.5",
     "typescript": "~5.2.2"
   },
   "engines": {
