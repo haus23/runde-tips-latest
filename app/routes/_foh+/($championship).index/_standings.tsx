@@ -1,31 +1,21 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData, useParams } from '@remix-run/react';
 
-import { db } from '#modules/api/db.server';
+import { getPublishedChampionshipBySlug } from '#modules/api/model/championships';
+import { getRankedPlayers } from '#modules/api/model/players';
 
 export const handle = { viewPath: '' };
 
 export async function loader({ params }: DataFunctionArgs) {
   const { championship: slug } = params;
 
-  const championship = await db.query.championshipTable.findFirst({
-    where: (championship, { eq, and }) =>
-      and(
-        eq(championship.published, true),
-        slug ? eq(championship.slug, slug) : undefined,
-      ),
-    orderBy: (championship, { desc }) => [desc(championship.nr)],
-  });
+  const championship = await getPublishedChampionshipBySlug(slug);
 
   if (!championship) {
     throw new Error('No championship found');
   }
 
-  const ranking = await db.query.playerTable.findMany({
-    where: (player, { eq }) => eq(player.championshipId, championship.id),
-    orderBy: (player, { asc }) => [asc(player.rank)],
-    with: { user: { columns: { name: true, slug: true } } },
-  });
+  const ranking = await getRankedPlayers(championship.id);
 
   return json({ championship, ranking });
 }
