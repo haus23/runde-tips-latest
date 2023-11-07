@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 
-import { useUser } from '#app/utils/user';
+import { useUser } from '#utils/user';
 
 export function UserMenu() {
   const user = useUser();

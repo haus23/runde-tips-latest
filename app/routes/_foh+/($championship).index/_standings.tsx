@@ -1,7 +1,7 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData, useParams } from '@remix-run/react';
 
-import { db } from '#app/modules/api/db.server';
+import { db } from '#modules/api/db.server';
 
 export const handle = { viewPath: '' };
 

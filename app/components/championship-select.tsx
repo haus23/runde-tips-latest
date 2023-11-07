@@ -1,8 +1,8 @@
 import { type ChangeEvent } from 'react';
 import { useLocation, useNavigate } from '@remix-run/react';
 
-import { useChampionships } from '#app/utils/hooks/use-championships';
-import { useViewSegment } from '#app/utils/route-handle';
+import { useChampionships } from '#utils/hooks/use-championships';
+import { useViewSegment } from '#utils/route-handle';
 
 export function ChampionshipSelect() {
   const { championships, current } = useChampionships();

@@ -1,6 +1,6 @@
 import { useParams, useRouteLoaderData } from '@remix-run/react';
 
-import type { loader } from '#app/routes/_foh+/_layout/_foh-layout';
+import type { loader } from '#routes/_foh+/_layout/_foh-layout';
 
 import { invariant } from '../invariant';
 

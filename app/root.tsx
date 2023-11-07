@@ -5,9 +5,9 @@ import {
 } from '@remix-run/node';
 import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
-import styles from '#app/styles.css';
+import { getUser } from '#modules/auth/auth.server';
 
-import { getUser } from './modules/auth/auth.server';
+import styles from './styles.css';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 

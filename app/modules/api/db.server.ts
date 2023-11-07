@@ -1,4 +1,4 @@
-import { singleton } from '#app/utils/server/singleton.server';
+import { singleton } from '#utils/server/singleton.server';
 
 import { drizzleInstance } from './orm/drizzle.instance';
 

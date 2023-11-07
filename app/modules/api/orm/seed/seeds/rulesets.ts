@@ -1,7 +1,7 @@
 import ky from 'ky';
 
-import { drizzleInstance as db } from '#app/modules/api/orm/drizzle.instance';
-import { rulesetTable } from '#app/modules/api/orm/schema';
+import { drizzleInstance as db } from '#modules/api/orm/drizzle.instance';
+import { rulesetTable } from '#modules/api/orm/schema';
 
 export async function seedRulesets() {
   const rulesets = await ky

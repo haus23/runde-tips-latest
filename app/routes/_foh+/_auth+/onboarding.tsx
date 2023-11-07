@@ -5,9 +5,9 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
-import { getSession } from '#app/modules/auth/auth-session.server';
-import { login, requireAnonymous } from '#app/modules/auth/auth.server';
-import { validateLoginCode } from '#app/utils/server/totp.server';
+import { getSession } from '#modules/auth/auth-session.server';
+import { login, requireAnonymous } from '#modules/auth/auth.server';
+import { validateLoginCode } from '#utils/server/totp.server';
 
 function createFormSchema(constraint?: {
   isValidCode?: (code: string) => Promise<boolean>;
