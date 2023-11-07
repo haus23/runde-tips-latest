@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v0.1.6
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.5...v0.1.6)
+
+### 💅 Refactors
+
+- Rename db module to api module. ([993266d](https://github.com/haus23/runde-tips/commit/993266d))
+- Move root db folder into api module. ([d65ef21](https://github.com/haus23/runde-tips/commit/d65ef21))
+- Fix drizzle config paths. ([99c8f54](https://github.com/haus23/runde-tips/commit/99c8f54))
+- Drop type-fest, this is an app - no framework. ([b8b86e5](https://github.com/haus23/runde-tips/commit/b8b86e5))
+- Reorganize deps. Dev deps are dev-server, typescript and types, formatting and later linting. ([1aed2a1](https://github.com/haus23/runde-tips/commit/1aed2a1))
+- Move aliased folder. App is the new root. ([b80a822](https://github.com/haus23/runde-tips/commit/b80a822))
+- Move db usages into model. ([14f4353](https://github.com/haus23/runde-tips/commit/14f4353))
+- Add championship loading in layout. Align loaded data usage. ([2cec89c](https://github.com/haus23/runde-tips/commit/2cec89c))
+- Again reorganize folders. ([8551363](https://github.com/haus23/runde-tips/commit/8551363))
+- Mark model files as server only. ([8d4f47c](https://github.com/haus23/runde-tips/commit/8d4f47c))
+
+### 🏡 Chore
+
+- **dx:** Ignore temporary local files. ([46f64c8](https://github.com/haus23/runde-tips/commit/46f64c8))
+- **dx:** Setup minimal lint config to restrict db.server imports. ([cf17032](https://github.com/haus23/runde-tips/commit/cf17032))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.5
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.4...v0.1.5)
