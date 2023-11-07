@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
-import { db } from '#app/modules/db/db.server';
+import { db } from '#app/modules/api/db.server';
 
 import { FohHeader } from './header';
 import { Notifications } from './notifications';

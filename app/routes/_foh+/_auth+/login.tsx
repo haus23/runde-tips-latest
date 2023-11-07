@@ -5,13 +5,13 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
+import { getUserByEmail } from '#app/modules/api/model/users';
 import {
   commitSession,
   getSession,
 } from '#app/modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#app/modules/auth/auth.server';
 import { createCodeEmailContent } from '#app/modules/auth/code.email';
-import { getUserByEmail } from '#app/modules/db/model/users';
 import { invariant } from '#app/utils/invariant';
 import { sendEmail } from '#app/utils/server/email.server';
 import { generateLoginCode } from '#app/utils/server/totp.server';
