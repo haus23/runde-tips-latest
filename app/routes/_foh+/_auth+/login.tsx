@@ -5,7 +5,7 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
-import { getUserByEmail } from '#modules/api/model/users';
+import { getUserByEmail } from '#modules/api/model/users.server';
 import { commitSession, getSession } from '#modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#modules/auth/auth.server';
 import { createCodeEmailContent } from '#modules/auth/code.email';

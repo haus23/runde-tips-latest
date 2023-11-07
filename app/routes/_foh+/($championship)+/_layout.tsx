@@ -1,7 +1,7 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
-import { getPublishedChampionshipBySlug } from '#modules/api/model/championships';
+import { getPublishedChampionshipBySlug } from '#modules/api/model/championships.server';
 
 export async function loader({ params }: DataFunctionArgs) {
   const { championship: slug } = params;

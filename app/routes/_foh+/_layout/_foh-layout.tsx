@@ -1,7 +1,7 @@
 import { json } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
-import { getPublishedChampionships } from '#modules/api/model/championships';
+import { getPublishedChampionships } from '#modules/api/model/championships.server';
 
 import { FohHeader } from './header';
 import { Notifications } from './notifications';

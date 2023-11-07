@@ -1,6 +1,6 @@
 import { redirect } from '@remix-run/node';
 
-import { getUserByEmail, getUserById } from '#modules//api/model/users';
+import { getUserByEmail, getUserById } from '#modules/api/model/users.server';
 import { invariant } from '#utils/invariant';
 
 import {

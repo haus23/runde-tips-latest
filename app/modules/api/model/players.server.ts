@@ -1,5 +1,5 @@
 import { db } from '../db.server';
-import { getPublishedChampionshipBySlug } from './championships';
+import { getPublishedChampionshipBySlug } from './championships.server';
 
 export async function getRankedPlayers(championshipSlug?: string) {
   const championship = await getPublishedChampionshipBySlug(championshipSlug);
