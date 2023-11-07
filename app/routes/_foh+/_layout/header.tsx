@@ -4,7 +4,7 @@ import { ChampionshipSelect } from '#components/championship-select';
 import { Icon } from '#components/icon';
 import { Logo } from '#components/logo';
 import { UserMenu } from '#components/user-menu';
-import { useIsAuthenticated } from '#utils/user';
+import { useIsAuthenticated } from '#utils/auth/user';
 
 export function FohHeader() {
   const { championship = '' } = useParams();

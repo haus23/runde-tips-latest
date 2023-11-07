@@ -2,7 +2,7 @@ import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData, useParams } from '@remix-run/react';
 
 import { getRankedPlayers } from '#modules/api/model/players';
-import { useChampionship } from '#utils/hooks/foh/use-championship';
+import { useChampionship } from '#utils/foh/use-championship';
 
 export const handle = { viewPath: '' };
 
