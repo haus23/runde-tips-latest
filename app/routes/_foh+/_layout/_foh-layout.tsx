@@ -8,7 +8,7 @@ import { Notifications } from './notifications';
 
 export async function loader() {
   const championships = await getPublishedChampionships();
-  return json(championships);
+  return json({ championships });
 }
 
 export default function FohLayout() {

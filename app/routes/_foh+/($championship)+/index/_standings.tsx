@@ -1,28 +1,22 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData, useParams } from '@remix-run/react';
 
-import { getPublishedChampionshipBySlug } from '#modules/api/model/championships';
 import { getRankedPlayers } from '#modules/api/model/players';
+import { useChampionship } from '#utils/hooks/foh/use-championship';
 
 export const handle = { viewPath: '' };
 
 export async function loader({ params }: DataFunctionArgs) {
   const { championship: slug } = params;
 
-  const championship = await getPublishedChampionshipBySlug(slug);
-
-  if (!championship) {
-    throw new Error('No championship found');
-  }
-
-  const ranking = await getRankedPlayers(championship.id);
-
-  return json({ championship, ranking });
+  const ranking = await getRankedPlayers(slug);
+  return json({ ranking });
 }
 
 export default function StandingsRoute() {
-  const { championship, ranking } = useLoaderData<typeof loader>();
   const { championship: championshipSlug = '' } = useParams();
+  const championship = useChampionship();
+  const { ranking } = useLoaderData<typeof loader>();
 
   return (
     <div>

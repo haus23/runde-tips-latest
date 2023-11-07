@@ -1,14 +1,16 @@
 import { type ChangeEvent } from 'react';
-import { useLocation, useNavigate } from '@remix-run/react';
+import { useLocation, useNavigate, useParams } from '@remix-run/react';
 
-import { useChampionships } from '#utils/hooks/use-championships';
+import { useChampionships } from '#utils/hooks/foh/use-championships';
 import { useViewSegment } from '#utils/route-handle';
 
 export function ChampionshipSelect() {
-  const { championships, current } = useChampionships();
+  const { championship: currentSlug = '' } = useParams();
   const { search } = useLocation();
-  const viewSegment = useViewSegment();
   const navigate = useNavigate();
+
+  const championships = useChampionships();
+  const viewSegment = useViewSegment();
 
   function handleSelect(ev: ChangeEvent<HTMLSelectElement>) {
     const slug = ev.target.value;
@@ -23,7 +25,7 @@ export function ChampionshipSelect() {
   }
 
   return (
-    <select value={current.slug} onChange={handleSelect} name="slug">
+    <select value={currentSlug} onChange={handleSelect} name="slug">
       {championships.map((c) => (
         <option key={c.id} value={c.slug}>
           {c.name}
