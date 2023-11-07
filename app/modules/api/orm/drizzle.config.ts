@@ -5,5 +5,5 @@ export default {
   dbCredentials: {
     url: process.env.DATABASE_URL || 'file:./data/development.db',
   },
-  schema: './db/schema.ts',
+  schema: 'app/modules/api/orm/schema.ts',
 } satisfies Config;
