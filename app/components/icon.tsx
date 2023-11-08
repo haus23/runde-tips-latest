@@ -1,21 +1,27 @@
 import type { SVGProps } from 'react';
 
-import { tw } from '#utils/tailwind';
+import { cx } from '#utils/tailwind';
 
 import iconFile from './icons.svg';
 
-const icons = ['avatar', 'close', 'computer', 'menu', 'moon', 'sun'] as const;
+const icons = [
+  'avatar',
+  'close',
+  'computer',
+  'menu',
+  'moon',
+  'search',
+  'sun',
+] as const;
 export type IconName = (typeof icons)[number];
 
-export function Icon({
-  name,
-  className,
-  ...props
-}: SVGProps<SVGSVGElement> & {
+interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
-}) {
+}
+
+export function Icon({ name, className, ...props }: IconProps) {
   return (
-    <svg {...props} className={tw('inline h-6 w-6 self-center', className)}>
+    <svg {...props} className={cx('inline h-6 w-6 self-center', className)}>
       <use href={`${iconFile}#${name}`} />
     </svg>
   );

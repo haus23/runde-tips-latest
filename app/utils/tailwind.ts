@@ -1,6 +1,8 @@
-import { cx, type CxOptions } from 'cva';
+import { defineConfig } from 'cva';
 import { twMerge } from 'tailwind-merge';
 
-export function tw(...inputs: CxOptions) {
-  return twMerge(cx(inputs));
-}
+export type { VariantProps } from 'cva';
+
+export const { cva, cx } = defineConfig({
+  hooks: { onComplete: (className) => twMerge(className) },
+});
