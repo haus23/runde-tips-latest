@@ -6,10 +6,14 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
-    ignores: ['**/api/model/*'],
     languageOptions: {
       parser: typescriptParser,
     },
+  },
+  // Restrict import of db.server.ts
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    ignores: ['**/api/model/*'],
     rules: {
       'no-restricted-imports': ['error', { patterns: ['db.server'] }],
     },
