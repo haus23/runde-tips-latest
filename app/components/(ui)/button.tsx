@@ -1,6 +1,10 @@
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cva, type VariantProps } from 'cva';
+import {
+  Button as AriaButton,
+  type ButtonProps as AriaButtonProps,
+} from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 
 const buttonVariants = cva(
@@ -23,13 +27,13 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends ComponentPropsWithoutRef<'button'>,
+  extends AriaButtonProps,
     VariantProps<typeof buttonVariants> {}
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, ...props }, ref) => {
     return (
-      <button
+      <AriaButton
         className={twMerge(buttonVariants({ variant, className }))}
         ref={ref}
         {...props}
