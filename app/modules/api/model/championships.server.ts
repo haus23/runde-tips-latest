@@ -1,11 +1,4 @@
-import { z } from 'zod';
-
 import { db } from '../db.server';
-
-const ChampionshipSlug = z
-  .string()
-  .regex(/^[a-z]{2}\d{4}$/, 'Bad championship id')
-  .optional();
 
 export async function getPublishedChampionships() {
   return await db.query.championshipTable.findMany({
@@ -15,15 +8,6 @@ export async function getPublishedChampionships() {
 }
 
 export async function getPublishedChampionshipBySlug(slug?: string) {
-  const parsedSlug = ChampionshipSlug.safeParse(slug);
-
-  if (!parsedSlug.success) {
-    throw new Response(null, {
-      status: 404,
-      statusText: `Not found`,
-    });
-  }
-
   const championship = await db.query.championshipTable.findFirst({
     where: (championship, { eq, and }) =>
       and(
