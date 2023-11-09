@@ -5,6 +5,7 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
+import { TextField } from '#components/(ui)/text-field';
 import { getUserByEmail } from '#modules/api/model/users.server';
 import { commitSession, getSession } from '#modules/auth/auth-session.server';
 import { isKnownEmail, requireAnonymous } from '#modules/auth/auth.server';
@@ -76,13 +77,11 @@ export async function action({ request }: DataFunctionArgs) {
   });
 }
 
-function CodeEmail() {}
 export default function LoginRoute() {
   const { email } = useLoaderData<typeof loader>();
   const lastSubmission = useActionData<typeof action>();
 
   const [form, fields] = useForm({
-    id: 'login',
     lastSubmission,
     onValidate({ formData }) {
       return parse(formData, { schema: createFormSchema() });
@@ -94,11 +93,13 @@ export default function LoginRoute() {
     <div>
       <h2>Anmeldung</h2>
       <Form method="post" {...form.props}>
-        <div>
-          <label htmlFor={fields.email.id}>Email</label>
-          <input {...conform.input(fields.email, { type: 'email' })} />
-          <div id={fields.email.errorId}>{fields.email.errors}</div>
-        </div>
+        <TextField
+          label="Email"
+          type="email"
+          isRequired
+          {...conform.input(fields.email)}
+          validate={() => fields.email.errors}
+        />
         <button>Login-Code anfordern</button>
       </Form>
     </div>
