@@ -6,6 +6,7 @@ import iconFile from './icons.svg';
 
 const icons = [
   'avatar',
+  'check',
   'close',
   'computer',
   'menu',
