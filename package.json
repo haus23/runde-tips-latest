@@ -11,8 +11,8 @@
     "dev": "remix dev",
     "build": "remix build",
     "start": "remix-serve ./build/index.js",
-    "db:push": "drizzle-kit push:sqlite --config app/modules/api/orm/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config app/modules/api/orm/drizzle.config.ts --port 3030 --host 127.0.0.1",
+    "db:push": "drizzle-kit push:sqlite --config db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config db/drizzle.config.ts --port 3030 --host 127.0.0.1",
     "db:seed": "tsx --env-file=.env app/modules/api/orm/seed",
     "format": "prettier . --write"
   },
