@@ -2,7 +2,10 @@ import { Form } from '@remix-run/react';
 
 import { toast } from 'sonner';
 
-import { emitter, type NotificationMsg } from '#utils/server/emitter.server';
+import {
+  emitter,
+  type NotificationMsg,
+} from '#app/utils/server/emitter.server';
 
 export const handle = { viewPath: 'tipps/spiele' };
 

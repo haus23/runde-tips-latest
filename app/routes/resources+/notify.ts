@@ -2,7 +2,10 @@ import type { LoaderFunctionArgs } from '@remix-run/node';
 
 import { eventStream } from 'remix-utils/sse/server';
 
-import { emitter, type NotificationMsg } from '#utils/server/emitter.server';
+import {
+  emitter,
+  type NotificationMsg,
+} from '#app/utils/server/emitter.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return eventStream(request.signal, (send) => {

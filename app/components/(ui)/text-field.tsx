@@ -8,7 +8,7 @@ import {
   type TextFieldProps as AriaTextFieldProps,
 } from 'react-aria-components';
 
-import { cva, cx, type VariantProps } from '#utils/tailwind';
+import { cva, cx, type VariantProps } from '#app/utils/tailwind';
 
 const inputVariants = cva({
   base: [

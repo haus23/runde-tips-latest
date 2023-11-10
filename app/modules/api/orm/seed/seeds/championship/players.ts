@@ -1,11 +1,11 @@
 import ky from 'ky';
 
-import { drizzleInstance as db } from '#modules/api/orm/drizzle.instance';
+import { drizzleInstance as db } from '#app/modules/api/orm/drizzle.instance';
 import {
   championshipTable,
   playerTable,
   userTable,
-} from '#modules/api/orm/schema';
+} from '#app/modules/api/orm/schema';
 
 type Championship = typeof championshipTable.$inferSelect;
 

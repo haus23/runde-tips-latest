@@ -12,10 +12,10 @@ import {
   type Key,
 } from 'react-aria-components';
 
-import { useChampionship } from '#utils/foh/use-championship';
-import { useChampionships } from '#utils/foh/use-championships';
-import { useViewSegment } from '#utils/route-handle';
-import { cx } from '#utils/tailwind';
+import { useChampionship } from '#app/utils/foh/use-championship';
+import { useChampionships } from '#app/utils/foh/use-championships';
+import { useViewSegment } from '#app/utils/route-handle';
+import { cx } from '#app/utils/tailwind';
 
 import { Button } from './(ui)/button';
 import { TextField } from './(ui)/text-field';

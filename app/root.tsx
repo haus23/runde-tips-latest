@@ -5,7 +5,7 @@ import {
 } from '@remix-run/node';
 import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
-import { getUser } from '#modules/auth/auth.server';
+import { getUser } from '#app/modules/auth/auth.server';
 
 import styles from './styles.css';
 

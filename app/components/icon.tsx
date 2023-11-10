@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-import { cx } from '#utils/tailwind';
+import { cx } from '#app/utils/tailwind';
 
 import iconFile from './icons.svg';
 

@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "imports": {
-    "#*": "./app/*"
+    "#*": "./*"
   },
   "scripts": {
     "dev": "remix dev",

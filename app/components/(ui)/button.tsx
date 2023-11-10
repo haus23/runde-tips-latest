@@ -5,7 +5,7 @@ import {
   type ButtonProps as AriaButtonProps,
 } from 'react-aria-components';
 
-import { cva, type VariantProps } from '#utils/tailwind';
+import { cva, type VariantProps } from '#app/utils/tailwind';
 
 const buttonVariants = cva({
   base: [

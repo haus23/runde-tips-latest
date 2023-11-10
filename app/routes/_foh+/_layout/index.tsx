@@ -1,8 +1,8 @@
 import { json, type DataFunctionArgs } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
-import { getPublishedChampionships } from '#modules/api/model/championships.server';
-import { ChampionshipSlug } from '#modules/api/schema';
+import { getPublishedChampionships } from '#app/modules/api/model/championships.server';
+import { ChampionshipSlug } from '#app/modules/api/schema';
 
 import { FohHeader } from './header';
 import { Notifications } from './notifications';
