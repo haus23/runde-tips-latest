@@ -1,7 +1,7 @@
 {
   "name": "@haus23/runde-tips",
   "description": "Tipprunde",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "type": "module",
   "imports": {

@@ -1,6 +1,41 @@
 # Changelog
 
 
+## v0.1.7
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.6...v0.1.7)
+
+### 🚀 Enhancements
+
+- Add text-field ui component. ([aa139da](https://github.com/haus23/runde-tips/commit/aa139da))
+- Add check icon. ([3266b94](https://github.com/haus23/runde-tips/commit/3266b94))
+- Add partly working championship select component ([2908b50](https://github.com/haus23/runde-tips/commit/2908b50))
+
+### 🩹 Fixes
+
+- Revert changing alias path. ([2d6979c](https://github.com/haus23/runde-tips/commit/2d6979c))
+- Move drizzle config up to db folder again. ([788813d](https://github.com/haus23/runde-tips/commit/788813d))
+- Move drizzle instance and schema again up into db folder. ([1b0b419](https://github.com/haus23/runde-tips/commit/1b0b419))
+- Move seed folder out of the app back into the db folder. ([c7edec3](https://github.com/haus23/runde-tips/commit/c7edec3))
+
+### 💅 Refactors
+
+- Switch to react aria components. ([8bf7c6e](https://github.com/haus23/runde-tips/commit/8bf7c6e))
+- Upgrade to cva beta. Use new hooks property. And add new search icon. ([efc84f8](https://github.com/haus23/runde-tips/commit/efc84f8))
+- Move championship loading one path up. Drop unneeded layout. ([7d8bc34](https://github.com/haus23/runde-tips/commit/7d8bc34))
+
+### 🏡 Chore
+
+- Install cva and remove explicit clsx dep. ([5d4f03d](https://github.com/haus23/runde-tips/commit/5d4f03d))
+- **dx:** Start design system with first prototype: a button ([4c0472c](https://github.com/haus23/runde-tips/commit/4c0472c))
+- Refine eslint config. First we need to lint model files as well. ([a3babdc](https://github.com/haus23/runde-tips/commit/a3babdc))
+- Upgrade react aria components. ([9a49d07](https://github.com/haus23/runde-tips/commit/9a49d07))
+- Adapt readme files. ([4cc7d24](https://github.com/haus23/runde-tips/commit/4cc7d24))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.6
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.5...v0.1.6)
