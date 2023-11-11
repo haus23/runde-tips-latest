@@ -5,14 +5,14 @@ import { Command } from '#app/components/(ui)/command';
 export const handle = { viewPath: 'tipps/spieler' };
 
 export default function PlayerTipsRoute() {
+  const commands = ['Do', 'it', 'now'];
   return (
     <div>
       <h2>Spieler - Tipps</h2>
-      <Command>
-        {/* Default: item.textValue not set, so use the children as textValue. We need to render children! */}
-        <Item>Woohoo</Item>
-        <Item>A small step for mankind ...</Item>
-      </Command>
+      {/* Problem jetzt: Map from incoming type (string now, better an object) to CollectionElement */}
+      {/* Es gab sowas wie einen itemRenderer ...
+      Der könnte die States bereitstellen (isSelected) ... */}
+      {/* <Command children={commands} /> */}
     </div>
   );
 }
