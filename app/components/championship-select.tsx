@@ -1,15 +1,14 @@
 import { useState, type FormEvent } from 'react';
-import { useLocation, useNavigate, useRevalidator } from '@remix-run/react';
+import { useLocation } from '@remix-run/react';
 
 import {
   Dialog,
   DialogTrigger,
-  Menu,
-  MenuItem,
+  ListBox,
+  ListBoxItem,
   Modal,
   ModalOverlay,
   Text,
-  type Key,
 } from 'react-aria-components';
 
 import { useChampionship } from '#app/utils/foh/use-championship';
@@ -23,8 +22,6 @@ import { Icon } from './icon';
 
 export function ChampionshipSelect() {
   const { search } = useLocation();
-  const navigate = useNavigate();
-  const revalidator = useRevalidator();
 
   const championships = useChampionships();
   const current = useChampionship();
@@ -37,21 +34,6 @@ export function ChampionshipSelect() {
     if (!open) {
       setFilteredChampionships(championships);
     }
-  }
-
-  function handleSelection(slug: Key) {
-    setIsOpen(false);
-    const championshipSegment = slug === championships[0]?.slug ? '' : slug;
-    revalidator.revalidate();
-    navigate(
-      {
-        pathname: `/${[championshipSegment, viewSegment]
-          .filter(Boolean)
-          .join('/')}`,
-        search,
-      },
-      { unstable_viewTransition: true },
-    );
   }
 
   const [filteredChampionships, setFilteredChampionships] =
@@ -86,32 +68,40 @@ export function ChampionshipSelect() {
               className="mt-0 border-0 px-6 py-2.5 font-semibold sm:text-base"
               onInput={handleFilterChange}
             />
-            <Menu
+            <ListBox
               aria-label="Wähle ein Turnier"
-              selectionMode="single"
-              disallowEmptySelection
               items={filteredChampionships}
-              defaultSelectedKeys={[current.slug]}
               className="border-t p-2"
-              onAction={handleSelection}
-            >
-              {(championship) => (
-                <MenuItem
-                  className={cx(
-                    'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[focused]:bg-stone-200',
-                  )}
-                  id={championship.slug}
-                  textValue={championship.name}
-                >
-                  {({ isSelected }) => (
-                    <>
-                      <Text slot="label">{championship.name}</Text>
-                      {isSelected && <Icon name="check" />}
-                    </>
-                  )}
-                </MenuItem>
+              renderEmptyState={() => (
+                <span className="px-4 py-2">Kein Turnier gefunden.</span>
               )}
-            </Menu>
+            >
+              {(championship) => {
+                const championshipSegment =
+                  championship.slug === championships[0]?.slug
+                    ? ''
+                    : championship.slug;
+                const pathname =
+                  `/${[championshipSegment, viewSegment]
+                    .filter(Boolean)
+                    .join('/')}` + search;
+
+                return (
+                  <ListBoxItem
+                    href={pathname}
+                    className={cx(
+                      'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[focused]:bg-stone-200',
+                    )}
+                    textValue={championship.name}
+                  >
+                    <Text slot="label">{championship.name}</Text>
+                    {current.slug === championship.slug && (
+                      <Icon name="check" />
+                    )}
+                  </ListBoxItem>
+                );
+              }}
+            </ListBox>
           </Dialog>
         </Modal>
       </ModalOverlay>
