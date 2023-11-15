@@ -53,12 +53,18 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
+  react-aria:
+    specifier: ^3.30.0
+    version: 3.30.0(react-dom@18.2.0)(react@18.2.0)
   react-aria-components:
     specifier: 1.0.0-rc.0
     version: 1.0.0-rc.0(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-stately:
+    specifier: ^3.28.0
+    version: 3.28.0(react@18.2.0)
   remix-flat-routes:
     specifier: ^0.6.2
     version: 0.6.2(@remix-run/dev@2.2.0)
