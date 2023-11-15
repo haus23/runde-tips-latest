@@ -5,9 +5,12 @@ import {
 } from '@remix-run/node';
 import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
+import { RouterProvider } from 'react-aria';
+
 import { getUser } from '#app/modules/auth/auth.server';
 
 import styles from './styles.css';
+import { useNavigate } from './utils/use-navigate';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -18,6 +21,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function App() {
+  const navigate = useNavigate();
+
   return (
     <html lang="de">
       <head>
@@ -27,7 +32,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <RouterProvider navigate={navigate}>
+          <Outlet />
+        </RouterProvider>
         <Scripts />
         <LiveReload />
       </body>
