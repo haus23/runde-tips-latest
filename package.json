@@ -20,7 +20,7 @@
     "@conform-to/react": "^0.9.1",
     "@conform-to/zod": "^0.9.1",
     "@epic-web/totp": "^1.1.1",
-    "@jsx-email/all": "^2.2.3",
+    "@jsx-email/all": "^3.0.1",
     "@libsql/client": "^0.3.6",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
