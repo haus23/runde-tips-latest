@@ -8,10 +8,15 @@ import { FohHeader } from './header';
 import { Notifications } from './notifications';
 
 export async function loader({ params }: DataFunctionArgs) {
+  // Despite not using the championshipSlug to load the current championship
+  // we validate it anyway right here. Due to my routing configuration with the
+  // optional championship slug as param, an route not matching elsewhere will
+  // end here and in this loader. So we are here responsible for any 404 error.
+
   const { championship: slug } = params;
 
+  // Possible slug? (matches /[a-b]{2}[0-9]{5})
   const parsedSlug = ChampionshipSlug.safeParse(slug);
-
   if (!parsedSlug.success) {
     throw new Response(null, {
       status: 404,
@@ -19,19 +24,21 @@ export async function loader({ params }: DataFunctionArgs) {
     });
   }
 
+  // Load championships
   const championships = await getPublishedChampionships();
-  const championship = slug
-    ? championships.find((c) => c.slug === slug)
-    : championships[0];
 
-  if (!championship) {
-    throw new Response(null, {
-      status: 400,
-      statusText: `Keine gültige Turnierkennung: ${slug}`,
-    });
+  // Real existing slug?
+  if (slug) {
+    const hasChampionshipWithSlug = championships.some((c) => c.slug === slug);
+    if (!hasChampionshipWithSlug) {
+      throw new Response(null, {
+        status: 400,
+        statusText: `Keine gültige Turnierkennung: ${slug}`,
+      });
+    }
   }
 
-  return json({ championships, championship });
+  return json({ championships });
 }
 
 export default function FohLayout() {

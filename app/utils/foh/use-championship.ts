@@ -1,9 +1,15 @@
-import { useRouteLoaderData } from '@remix-run/react';
+import { useParams } from '@remix-run/react';
 
-import { Championship } from '#app/modules/api/schema';
-import type { loader } from '#app/routes/_foh+/_layout';
+import { invariant } from '../invariant';
+import { useChampionships } from './use-championships';
 
 export function useChampionship() {
-  const data = useRouteLoaderData<typeof loader>('routes/_foh+/_layout/index');
-  return Championship.parse(data?.championship);
+  const championships = useChampionships();
+  const { championship: slug } = useParams();
+
+  const championship =
+    championships.find((c) => c.slug === slug) || championships[0];
+  invariant(championship);
+
+  return championship;
 }
