@@ -1,7 +1,7 @@
 import { createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
 
-import { championshipTable, playerTable } from '../../../../db/schema';
+import { championshipTable, playerTable } from '#db/schema';
 
 export const Championship = createSelectSchema(championshipTable);
 export const Player = createSelectSchema(playerTable);
