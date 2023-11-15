@@ -9,12 +9,14 @@ import {
   Modal,
   ModalOverlay,
   Text,
+  type Key,
 } from 'react-aria-components';
 
 import { useChampionship } from '#app/utils/foh/use-championship';
 import { useChampionships } from '#app/utils/foh/use-championships';
 import { useViewSegment } from '#app/utils/route-handle';
 import { cx } from '#app/utils/tailwind';
+import { useNavigate } from '#app/utils/use-navigate';
 
 import { Button } from './(ui)/button';
 import { TextField } from './(ui)/text-field';
@@ -22,6 +24,7 @@ import { Icon } from './icon';
 
 export function ChampionshipSelect() {
   const { search } = useLocation();
+  const navigate = useNavigate();
 
   const championships = useChampionships();
   const current = useChampionship();
@@ -46,6 +49,15 @@ export function ChampionshipSelect() {
         c.name.toLocaleLowerCase('de').includes(filter.toLocaleLowerCase('de')),
       ),
     );
+  }
+
+  function handleAction(key: Key) {
+    const championshipSegment = key === championships[0]?.slug ? '' : key;
+    const pathname = `/${[championshipSegment, viewSegment]
+      .filter(Boolean)
+      .join('/')}`;
+    setIsOpen(false);
+    navigate({ pathname, search });
   }
 
   return (
@@ -75,32 +87,20 @@ export function ChampionshipSelect() {
               renderEmptyState={() => (
                 <span className="px-4 py-2">Kein Turnier gefunden.</span>
               )}
+              onAction={handleAction}
             >
-              {(championship) => {
-                const championshipSegment =
-                  championship.slug === championships[0]?.slug
-                    ? ''
-                    : championship.slug;
-                const pathname =
-                  `/${[championshipSegment, viewSegment]
-                    .filter(Boolean)
-                    .join('/')}` + search;
-
-                return (
-                  <ListBoxItem
-                    href={pathname}
-                    className={cx(
-                      'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[focused]:bg-stone-200',
-                    )}
-                    textValue={championship.name}
-                  >
-                    <Text slot="label">{championship.name}</Text>
-                    {current.slug === championship.slug && (
-                      <Icon name="check" />
-                    )}
-                  </ListBoxItem>
-                );
-              }}
+              {(championship) => (
+                <ListBoxItem
+                  id={championship.slug}
+                  className={cx(
+                    'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[focused]:bg-stone-200',
+                  )}
+                  textValue={championship.name}
+                >
+                  <Text slot="label">{championship.name}</Text>
+                  {current.slug === championship.slug && <Icon name="check" />}
+                </ListBoxItem>
+              )}
             </ListBox>
           </Dialog>
         </Modal>
