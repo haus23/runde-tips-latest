@@ -93,7 +93,7 @@ export function ChampionshipSelect() {
                 <ListBoxItem
                   id={championship.slug}
                   className={cx(
-                    'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[focused]:bg-stone-200',
+                    'flex cursor-default select-none items-center justify-between rounded-md px-4 py-2 font-semibold data-[hovered]:bg-stone-100',
                   )}
                   textValue={championship.name}
                 >
