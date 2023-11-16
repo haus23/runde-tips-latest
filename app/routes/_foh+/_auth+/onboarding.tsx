@@ -5,6 +5,8 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
+import { Button } from '#app/components/(ui)/button';
+import { TextField } from '#app/components/(ui)/text-field';
 import { getSession } from '#app/modules/auth/auth-session.server';
 import { login, requireAnonymous } from '#app/modules/auth/auth.server';
 import { validateLoginCode } from '#app/utils/server/totp.server';
@@ -79,18 +81,19 @@ export default function OnboardingRoute() {
 
   return (
     <div>
-      <h2>Login Code</h2>
-      <Form method="post" {...form.props}>
-        <div>
-          <label htmlFor={fields.code.id}>Code</label>
-          <input
-            {...conform.input(fields.code)}
-            autoComplete="one-time-code"
-            inputMode="numeric"
-          />
-          <div id={fields.code.errorId}>{fields.code.errors}</div>
-        </div>
-        <button>Anmelden</button>
+      <header className="border-b pb-2">
+        <h2 className="text-xl font-semibold">Login Code</h2>
+      </header>
+      <Form method="post" {...form.props} className="mt-4 space-y-4">
+        <TextField
+          label="Code"
+          inputMode="numeric"
+          autoComplete="one-time-code"
+          isRequired
+          {...conform.input(fields.code)}
+          validate={() => fields.code.errors}
+        />
+        <Button type="submit">Anmelden</Button>
       </Form>
     </div>
   );

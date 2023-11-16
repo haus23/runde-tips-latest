@@ -5,6 +5,7 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
+import { Button } from '#app/components/(ui)/button';
 import { TextField } from '#app/components/(ui)/text-field';
 import { getUserByEmail } from '#app/modules/api/model/users.server';
 import {
@@ -95,8 +96,10 @@ export default function LoginRoute() {
 
   return (
     <div>
-      <h2>Anmeldung</h2>
-      <Form method="post" {...form.props}>
+      <header className="border-b pb-2">
+        <h2 className="text-xl font-semibold">Anmeldung</h2>
+      </header>
+      <Form method="post" {...form.props} className="mt-4 space-y-4">
         <TextField
           label="Email"
           type="email"
@@ -104,7 +107,7 @@ export default function LoginRoute() {
           {...conform.input(fields.email)}
           validate={() => fields.email.errors}
         />
-        <button>Login-Code anfordern</button>
+        <Button type="submit">Login-Code anfordern</Button>
       </Form>
     </div>
   );
