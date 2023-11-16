@@ -58,7 +58,8 @@ export async function action({ request }: DataFunctionArgs) {
   invariant(user, 'Unknown authenticated user.');
 
   const { code, secret } = generateLoginCode();
-  const body = createCodeEmailContent({ username: user.name, code });
+  const body = await createCodeEmailContent({ username: user.name, code });
+
   const smtpResult = await sendEmail({
     to: `${user.name} <${user.email}>`,
     subject: 'Tipprunde Login Code',

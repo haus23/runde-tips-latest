@@ -8,6 +8,7 @@ import {
   Section,
   Text,
 } from '@jsx-email/all';
+import { promiseHash } from 'remix-utils/promise';
 
 type CodeEmailProps = {
   username: string;
@@ -68,10 +69,10 @@ export function CodeEmail({ username, code }: CodeEmailProps) {
   );
 }
 
-export function createCodeEmailContent(props: CodeEmailProps) {
+export async function createCodeEmailContent(props: CodeEmailProps) {
   const email = <CodeEmail {...props} />;
-  return {
+  return await promiseHash({
     html: render(email),
     text: render(email, { plainText: true }),
-  };
+  });
 }
