@@ -14,7 +14,7 @@ import {
 
 import { useChampionship } from '#app/utils/foh/use-championship';
 import { useChampionships } from '#app/utils/foh/use-championships';
-import { useViewSegment } from '#app/utils/route-handle';
+import { useViewPath } from '#app/utils/route-handle';
 import { cx } from '#app/utils/tailwind';
 import { useNavigate } from '#app/utils/use-navigate';
 
@@ -28,7 +28,7 @@ export function ChampionshipSelect() {
 
   const championships = useChampionships();
   const current = useChampionship();
-  const viewSegment = useViewSegment();
+  const viewSegment = useViewPath();
 
   const [isOpen, setIsOpenState] = useState(false);
 
