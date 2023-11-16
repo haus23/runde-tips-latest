@@ -75,7 +75,8 @@ export async function action({ request }: DataFunctionArgs) {
   session.flash('auth:email', submission.value.email);
   session.flash('auth:secret', secret);
 
-  return redirect('/onboarding', {
+  const search = new URL(request.url).search;
+  return redirect(`/onboarding${search ?? ''}`, {
     headers: {
       'Set-Cookie': await commitSession(session),
     },

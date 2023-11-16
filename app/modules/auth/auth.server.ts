@@ -60,7 +60,11 @@ export async function isKnownEmail(email: string) {
   return user !== null;
 }
 
-export async function login(request: Request, email: string) {
+export async function login(
+  request: Request,
+  email: string,
+  redirectTo?: string,
+) {
   const session = await getSession(request.headers.get('Cookie'));
 
   const user = await getUserByEmail(email);
@@ -68,7 +72,7 @@ export async function login(request: Request, email: string) {
 
   session.set('user:id', user.id);
 
-  return redirect('/', {
+  return redirect(redirectTo || '/', {
     headers: {
       'Set-Cookie': await commitSession(session),
     },

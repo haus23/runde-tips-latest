@@ -65,7 +65,9 @@ export async function action({ request }: DataFunctionArgs) {
     return json(submission);
   }
 
-  return login(request, email);
+  const redirectTo =
+    new URL(request.url).searchParams.get('redirectTo') || undefined;
+  return login(request, email, redirectTo);
 }
 
 export default function OnboardingRoute() {
