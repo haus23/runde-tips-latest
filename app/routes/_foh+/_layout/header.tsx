@@ -1,6 +1,6 @@
-import { NavLink, useParams } from '@remix-run/react';
+import { useParams } from '@remix-run/react';
 
-import { Link } from '#app/components/(ui)/link';
+import { Link, NavLink } from '#app/components/(ui)/link';
 import { ChampionshipSelect } from '#app/components/championship-select';
 import { Icon } from '#app/components/icon';
 import { Logo } from '#app/components/logo';
@@ -20,31 +20,28 @@ export function FohHeader() {
           </Link>
         </div>
         <nav className="flex gap-x-2">
-          <Link
+          <NavLink
             variant="toolbar"
             className="border-0"
-            href={`/${championship}`}
+            to={`/${championship}`}
+            end
           >
             Tabelle
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             variant="toolbar"
             className="border-0"
-            href={`/${[championship, 'tipps/spieler']
-              .filter(Boolean)
-              .join('/')}`}
+            to={`/${[championship, 'tipps/spieler'].filter(Boolean).join('/')}`}
           >
             Spieler
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             variant="toolbar"
             className="border-0"
-            href={`/${[championship, 'tipps/spiele']
-              .filter(Boolean)
-              .join('/')}`}
+            to={`/${[championship, 'tipps/spiele'].filter(Boolean).join('/')}`}
           >
             Spiele
-          </Link>
+          </NavLink>
         </nav>
       </div>
       <div className="flex gap-x-2">

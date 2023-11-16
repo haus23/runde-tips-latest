@@ -1,4 +1,8 @@
 import { forwardRef } from 'react';
+import {
+  NavLink as RemixNavLink,
+  type NavLinkProps as RemixNavLinkProps,
+} from '@remix-run/react';
 
 import {
   Link as AriaLink,
@@ -13,7 +17,8 @@ const linkVariants = cva({
     variant: {
       default: '',
       primary: '',
-      toolbar: 'rounded-lg border p-2 hover:bg-stone-100',
+      toolbar:
+        'rounded-lg border p-2 hover:bg-stone-100 aria-[current=page]:text-black',
     },
   },
   defaultVariants: {
@@ -36,4 +41,21 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 );
 Link.displayName = 'Link';
 
-export { Link };
+interface NavLinkProps
+  extends RemixNavLinkProps,
+    VariantProps<typeof linkVariants> {}
+
+const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
+  ({ className, variant, ...props }, ref) => {
+    return (
+      <RemixNavLink
+        className={linkVariants({ variant, className })}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
+Link.displayName = 'NavLink';
+
+export { Link, NavLink };
