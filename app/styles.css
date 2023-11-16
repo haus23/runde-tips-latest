@@ -10,4 +10,12 @@
   body {
     @apply bg-stone-50 text-stone-800;
   }
+
+  html {
+    scrollbar-width: 0;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
 }
