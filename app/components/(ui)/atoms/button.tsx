@@ -8,15 +8,11 @@ import {
 import { cva, type VariantProps } from '#app/utils/tailwind';
 
 const buttonVariants = cva({
-  base: [
-    'inline-flex items-center justify-center px-4 py-2 font-medium',
-    'border hover:bg-stone-100', // Dev Classes
-  ],
+  base: [''],
   variants: {
     variant: {
-      default: 'rounded-md',
-      primary: '',
-      toolbar: 'rounded-lg px-2',
+      default: '',
+      toolbar: '',
     },
   },
   defaultVariants: {

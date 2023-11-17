@@ -5,7 +5,7 @@ import { conform, useForm } from '@conform-to/react';
 import { parse, refine } from '@conform-to/zod';
 import { z } from 'zod';
 
-import { Button } from '#app/components/(ui)/button';
+import { Button } from '#app/components/(ui)/atoms/button';
 import { TextField } from '#app/components/(ui)/text-field';
 import { getUserByEmail } from '#app/modules/api/model/users.server';
 import {

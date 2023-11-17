@@ -14,7 +14,8 @@
     "db:push": "drizzle-kit push:sqlite --config db/drizzle.config.ts",
     "db:studio": "drizzle-kit studio --config db/drizzle.config.ts --port 3030 --host 127.0.0.1",
     "db:seed": "tsx --env-file=.env db/seed",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@conform-to/react": "^0.9.1",
@@ -22,6 +23,10 @@
     "@epic-web/totp": "^1.1.1",
     "@jsx-email/all": "^3.0.1",
     "@libsql/client": "^0.3.6",
+    "@react-aria/interactions": "^3.20.0",
+    "@react-aria/link": "^3.6.2",
+    "@react-aria/utils": "^3.22.0",
+    "@react-types/link": "^3.5.2",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
     "@remix-run/serve": "^2.2.0",

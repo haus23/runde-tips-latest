@@ -18,9 +18,9 @@ import { useViewPath } from '#app/utils/route-handle';
 import { cx } from '#app/utils/tailwind';
 import { useNavigate } from '#app/utils/use-navigate';
 
-import { Button } from './(ui)/button';
+import { Button } from './(ui)/atoms/button';
+import { Icon } from './(ui)/atoms/icon';
 import { TextField } from './(ui)/text-field';
-import { Icon } from './icon';
 
 export function ChampionshipSelect() {
   const { search } = useLocation();

@@ -2,7 +2,7 @@ import type { SVGProps } from 'react';
 
 import { cx } from '#app/utils/tailwind';
 
-import iconFile from './icons.svg';
+import iconFile from '../assets/icons.svg';
 
 const icons = [
   'avatar',

@@ -1,8 +1,8 @@
 import { useParams } from '@remix-run/react';
 
-import { Link, NavLink } from '#app/components/(ui)/link';
+import { Icon } from '#app/components/(ui)/atoms/icon';
+import { Link, NavLink } from '#app/components/(ui)/atoms/link';
 import { ChampionshipSelect } from '#app/components/championship-select';
-import { Icon } from '#app/components/icon';
 import { Logo } from '#app/components/logo';
 import { UserMenu } from '#app/components/user-menu';
 import { useIsAuthenticated } from '#app/utils/auth/user';
@@ -15,7 +15,7 @@ export function FohHeader() {
     <header className="flex h-16 items-center justify-between border-b bg-white px-2 shadow sm:px-4">
       <div className="flex items-center gap-x-4">
         <div className="flex">
-          <Link variant="toolbar" className="border-0 px-1 py-0" href="/">
+          <Link variant="toolbar" className="border-0 px-1 py-0" to="/">
             <Logo />
           </Link>
         </div>
@@ -49,7 +49,7 @@ export function FohHeader() {
         {isAuthenticated ? (
           <UserMenu />
         ) : (
-          <Link href="/login" variant="toolbar">
+          <Link to="/login" variant="toolbar">
             <Icon name="avatar" />
           </Link>
         )}

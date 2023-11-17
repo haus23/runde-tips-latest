@@ -1,24 +1,22 @@
 import { forwardRef } from 'react';
 import {
+  Link as RemixLink,
   NavLink as RemixNavLink,
+  type LinkProps as RemixLinkProps,
   type NavLinkProps as RemixNavLinkProps,
 } from '@remix-run/react';
 
-import {
-  Link as AriaLink,
-  type LinkProps as AriaLinkProps,
-} from 'react-aria-components';
+import { usePress, type PressEvents } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
 
 import { cva, type VariantProps } from '#app/utils/tailwind';
 
 const linkVariants = cva({
-  base: ['inline-flex items-center'],
+  base: [''],
   variants: {
     variant: {
       default: '',
-      primary: '',
-      toolbar:
-        'rounded-lg border p-2 hover:bg-stone-100 aria-[current=page]:text-black',
+      toolbar: '',
     },
   },
   defaultVariants: {
@@ -26,12 +24,39 @@ const linkVariants = cva({
   },
 });
 
-interface LinkProps extends AriaLinkProps, VariantProps<typeof linkVariants> {}
+interface LinkProps
+  extends RemixLinkProps,
+    PressEvents,
+    VariantProps<typeof linkVariants> {}
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      onPress,
+      onPressStart,
+      onPressEnd,
+      onPressChange,
+      onPressUp,
+      ...props
+    },
+    ref,
+  ) => {
+    const { pressProps } = usePress({
+      onPress,
+      onPressStart,
+      onPressEnd,
+      onPressChange,
+      onPressUp,
+    });
+
+    props = mergeProps(pressProps, {
+      ...props,
+    });
+
     return (
-      <AriaLink
+      <RemixLink
         className={linkVariants({ variant, className })}
         ref={ref}
         {...props}
@@ -56,6 +81,6 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
     );
   },
 );
-Link.displayName = 'NavLink';
+NavLink.displayName = 'NavLink';
 
 export { Link, NavLink };

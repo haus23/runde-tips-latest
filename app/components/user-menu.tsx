@@ -8,8 +8,8 @@ import {
 
 import { useUser } from '#app/utils/auth/user';
 
-import { Button } from './(ui)/button';
-import { Icon } from './icon';
+import { Button } from './(ui)/atoms/button';
+import { Icon } from './(ui)/atoms/icon';
 
 export function UserMenu() {
   const user = useUser();
