@@ -3,7 +3,7 @@ import { useParams } from '@remix-run/react';
 import { Icon } from '#app/components/(ui)/atoms/icon';
 import { Link, NavLink } from '#app/components/(ui)/atoms/link';
 import { ChampionshipSelect } from '#app/components/championship-select';
-import { Logo } from '#app/components/logo';
+import { Logo } from '#app/components/logo/logo';
 import { UserMenu } from '#app/components/user-menu';
 import { useIsAuthenticated } from '#app/utils/auth/user';
 
