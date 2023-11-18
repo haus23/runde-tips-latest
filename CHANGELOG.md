@@ -1,6 +1,55 @@
 # Changelog
 
 
+## v0.1.8
+
+[compare changes](https://github.com/haus23/runde-tips/compare/v0.1.7...v0.1.8)
+
+### 🚀 Enhancements
+
+- Create the command component. ([450e310](https://github.com/haus23/runde-tips/commit/450e310))
+- Add manager layout and dashboard route. ([db395ef](https://github.com/haus23/runde-tips/commit/db395ef))
+- Add minimal header styling with link ui component. ([1c0e2eb](https://github.com/haus23/runde-tips/commit/1c0e2eb))
+- Highlight current nav link ([9e638ad](https://github.com/haus23/runde-tips/commit/9e638ad))
+- Add minimal styling for auth flow. ([c30f8b8](https://github.com/haus23/runde-tips/commit/c30f8b8))
+- Add user menu. ([a603d3d](https://github.com/haus23/runde-tips/commit/a603d3d))
+- Secure manager area. ([e18630f](https://github.com/haus23/runde-tips/commit/e18630f))
+- Redirect after login ([e3821e5](https://github.com/haus23/runde-tips/commit/e3821e5))
+- Start defining my design system. Docs added. ([95044c3](https://github.com/haus23/runde-tips/commit/95044c3))
+
+### 🩹 Fixes
+
+- Adjust API (due to upgrade?) ([a31055c](https://github.com/haus23/runde-tips/commit/a31055c))
+- Wrong import path. ([47e860c](https://github.com/haus23/runde-tips/commit/47e860c))
+- Add press events to NavLink as well. ([74bfca2](https://github.com/haus23/runde-tips/commit/74bfca2))
+- Clean up deps. ([9aa3aec](https://github.com/haus23/runde-tips/commit/9aa3aec))
+
+### 💅 Refactors
+
+- Drop the custom command component. Simplify the championship-select. ([d0d40b8](https://github.com/haus23/runde-tips/commit/d0d40b8))
+- Add default invariant error message. ([980c64e](https://github.com/haus23/runde-tips/commit/980c64e))
+- Not loading championship in the loader. Resolves  #14 ([#14](https://github.com/haus23/runde-tips/issues/14))
+- Bring back the augmented hook to use client routing with rac. ([4bc5ffa](https://github.com/haus23/runde-tips/commit/4bc5ffa))
+- Do navigation explicit again. ([3d231e8](https://github.com/haus23/runde-tips/commit/3d231e8))
+- Use explicit function type. ([470e13f](https://github.com/haus23/runde-tips/commit/470e13f))
+- Shorten the import path ([c177e42](https://github.com/haus23/runde-tips/commit/c177e42))
+- Align the dev hover styles. ([88e4c0a](https://github.com/haus23/runde-tips/commit/88e4c0a))
+- Rename hook and return undefined for no existing handle. ([d8c973c](https://github.com/haus23/runde-tips/commit/d8c973c))
+- Logo hast two files -> so move to a folder. ([07fc17a](https://github.com/haus23/runde-tips/commit/07fc17a))
+
+### 🏡 Chore
+
+- Add libs ([ee032dd](https://github.com/haus23/runde-tips/commit/ee032dd))
+- Update minor dep changes. ([8297455](https://github.com/haus23/runde-tips/commit/8297455))
+- Upgrade drizzle. ([5439a0c](https://github.com/haus23/runde-tips/commit/5439a0c))
+- Upgrade jsx-email. Mark email file as server only. ([2fdb48a](https://github.com/haus23/runde-tips/commit/2fdb48a))
+- Upgrade tsx ([a55d4e5](https://github.com/haus23/runde-tips/commit/a55d4e5))
+- Update deps. ([ec9dcaf](https://github.com/haus23/runde-tips/commit/ec9dcaf))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.7
 
 [compare changes](https://github.com/haus23/runde-tips/compare/v0.1.6...v0.1.7)
