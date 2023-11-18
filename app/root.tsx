@@ -5,7 +5,7 @@ import {
 } from '@remix-run/node';
 import { Links, LiveReload, Outlet, Scripts } from '@remix-run/react';
 
-import { RouterProvider } from 'react-aria';
+import { RouterProvider } from 'react-aria-components';
 
 import { getUser } from '#app/modules/auth/auth.server';
 
